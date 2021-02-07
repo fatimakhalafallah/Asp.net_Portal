@@ -1,0 +1,317 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.Odbc;
+using System.Configuration.Provider;
+//using System.Data.SqlDbType;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+public partial class UsersArea_Recruitment : System.Web.UI.Page
+{
+    public OdbcCommand comm = null;
+    public OdbcConnection con = null;
+    private string connection = null;
+
+    //private string connection = null;
+    protected System.Configuration.Configuration rootCfg = null;
+    protected System.Configuration.ConnectionStringSettings ConfigConString = null;
+
+    public SqlCommand command = null;
+    public SqlConnection conn = null;
+    public string EMPLOYEE_NO, DEPARTMENT_NO;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        //BindGrid();
+          EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        if (EMPLOYEE_NO == "" || EMPLOYEE_NO == null && DEPARTMENT_NO == "" || DEPARTMENT_NO == null)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        else
+        {
+            if (!IsPostBack)
+            {
+                getMenu();
+                //Reset();
+
+                //GridView1.DataKeyNames = 'RF_NO, SERIAL_NO';
+
+                CheckAccount();
+                Text_Date.Text = DateTime.Now.Date.ToString("dd-MMMM-yyyy");
+                BindGrid();
+            }
+        }
+    }
+
+    protected void Butt_Submit_Click(object sender, EventArgs e)
+    {
+        Insert();
+        BeginAdd();
+
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            if (row.RowType == DataControlRowType.DataRow)
+            {
+                string RF_NO        = ((TextBox)row.Cells[0].FindControl("Text_RF_NO")).Text;
+                string SERIAL_NO    = ((TextBox)row.Cells[1].FindControl("Text_SERIAL_NO")).Text;
+                string CAND_NAME    = ((TextBox)row.Cells[2].FindControl("Text_CAND_NAME")).Text;
+                string EXP_YEAR     = ((TextBox)row.Cells[3].FindControl("Text_EXP_YEAR")).Text;
+                string ADD_CREDIT   = ((TextBox)row.Cells[4].FindControl("Text_ADD_CREDIT")).Text;
+                string REMARKS      = ((TextBox)row.Cells[5].FindControl("Text_REMARKS")).Text;
+
+                Text_Test.Text = ((TextBox)row.Cells[1].FindControl("Text_SERIAL_NO")).Text;
+
+                if (SERIAL_NO != "")
+                {
+                    AddData(RF_NO, SERIAL_NO, CAND_NAME, EXP_YEAR, ADD_CREDIT, REMARKS);
+                }
+                else
+                {
+                    Label_Messages0.Text = "Not Saved";
+                }
+            }
+        }
+        ////BeginAdd(); 
+        //CompleteAdd();
+    }
+
+  
+    protected void Butt_Reset_Click(object sender, EventArgs e)
+    {
+        Reset();
+    }
+
+    private void Insert()
+    {
+        rootCfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/petroneeds");
+        connection = rootCfg.ConnectionStrings.ConnectionStrings["petroneedsConnectionString"].ConnectionString.ToString();
+        string sql;
+    
+        sql = "INSERT INTO RECRUITMENT_FORM" +
+        "(RF_NO, DEP_NO, JOB_NO, JOB_AVAILABLE, RF_TYPE, REPORTING_NO, REQ_PERIOD, " +
+        "POSITION_JUSTIFICATION, NO_OF_CANDIDATE, SINGLE_JUSTIFICATION, RF_DATE, MNG_CREATER, MNG_DATE, HR_ID," +
+        "HR_DATE, GM_ID, GM_DATE, SNR_MNG_ID, SNR_MNG_DATE, FORM_STATUS) VALUES" +
+
+        //"('" + Text_Num.Text + "', '" + DropDownList1.SelectedValue + "', '', '', '" + DropDownList2.SelectedItem + "', '', ''," +
+        //"'" + Text_Position.Text +" ', '"+ RadioButtonList2.SelectedValue +"', '"+ Text_Justific.Text +"', '"+ Text_Date.Text +"', '', '', ''," +
+        //"'', '', '', '', '', '0')";
+
+         "('" + Text_Num.Text + "', '" + DropDownList1.SelectedValue + "', '', '', '" + DropDownList2.SelectedValue + "', '', ''," +
+        "'" + Text_Position.Text + " ', '" + RadioButtonList2.SelectedValue + "', '" + Text_Justific.Text + "', '" + Text_Date.Text + "', '', '', ''," +
+        "'', '', '', '', '', '0')";
+
+        con = new OdbcConnection(connection);
+        con.ConnectionString = connection;
+        con.Open();
+
+        comm = new OdbcCommand(sql, con);
+        comm.ExecuteNonQuery();
+        con.Close();
+        //CheckAccount();
+    }
+
+    private void BindGrid()
+    {
+        List<aplication> items = new List<aplication>(2);
+        for (int i = 0; i < 2; i++)
+        {
+            aplication c = new aplication();
+            items.Add(c);
+        }
+
+        GridView1.DataSource = items;
+        GridView1.DataBind();
+    }
+
+    private void BeginAdd()
+    {
+        con.Open();
+        OdbcTransaction tran = con.BeginTransaction();
+        comm.Connection = con;
+        comm.Transaction = tran;
+
+        //comm.CommandText = "INSERT INTO RECRUITMENT_DTL(RF_NO,SERIAL_NO,CAND_NAME,EXP_YEAR,ADD_CREDIT,REMARKS) values(@RF_NO,@SERIAL_NO,@CAND_NAME,@EXP_YEAR,'" + TextBox1.Text + "','" + TextBox2.Text + "')";
+        //comm.CommandText = "INSERT INTO RECRUITMENT_DTL(RF_NO,SERIAL_NO,CAND_NAME,EXP_YEAR,ADD_CREDIT,REMARKS) values('"+ Text_Num.Text +"',@SERIAL_NO,@CAND_NAME,@EXP_YEAR,@ADD_CREDIT,@REMARKS)";
+        comm.CommandText = "INSERT INTO RECRUITMENT_DTL (RF_NO, SERIAL_NO, CAND_NAME, EXP_YEAR, ADD_CREDIT, REMARKS) VALUES" +
+            "(@RF_NO, @SERIAL_NO, @CAND_NAME, @EXP_YEAR, @ADD_CREDIT, @REMARKS)";
+
+        //OdbcParameter p1 = new OdbcParameter("'" + Text_Num.Text + "'", SqlDbType.BigInt);
+        //OdbcParameter p1 = new OdbcParameter("'" + Text_Num.Text + "'", OdbcType.VarChar);
+        OdbcParameter p1 = new OdbcParameter("@RF_NO", OdbcType.VarChar);
+        OdbcParameter p2 = new OdbcParameter("@SERIAL_NO", OdbcType.VarChar);
+        OdbcParameter p3 = new OdbcParameter("@CAND_NAME", OdbcType.VarChar);
+        OdbcParameter p4 = new OdbcParameter("@EXP_YEAR", OdbcType.VarChar);
+        OdbcParameter p5 = new OdbcParameter("@ADD_CREDIT", OdbcType.VarChar);
+        OdbcParameter p6 = new OdbcParameter("@REMARKS", OdbcType.VarChar);
+
+        comm.Parameters.Add(p1);
+        comm.Parameters.Add(p2);
+        comm.Parameters.Add(p3);
+        comm.Parameters.Add(p4);
+        comm.Parameters.Add(p5);
+        comm.Parameters.Add(p6);
+
+        //comm.Parameters.AddWithValue("@RF_NO", p1);
+        //comm.Parameters.AddWithValue("@SERIAL_NO", p2);
+        //comm.Parameters.AddWithValue("@CAND_NAME", p3);
+        //comm.Parameters.AddWithValue("@EXP_YEAR", p4);
+        //comm.Parameters.AddWithValue("@ADD_CREDIT", p5);
+        //comm.Parameters.AddWithValue("@REMARKS", p6);
+
+    }
+
+    private void CompleteAdd()
+    {
+        try
+        {
+            comm.Transaction.Commit();
+            Label_Messages.Text = "Added successfully!";
+        }
+        catch (Exception ex)
+        {
+            Label_Messages.Text = "Error completing the operation!";
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
+
+    private void AddData(string RF_no, string SERIAL_no, string CAND_name, string EXP_year, string ADD_credit, string Remarks)
+    //private void AddData(string RF_NO, string SERIAL_NO, string CAND_NAME, string EXP_YEAR, string ADD_CREDIT,string REMARKS)
+     {
+         try
+         {
+             comm.Parameters[0].Value = RF_no;
+             comm.Parameters[1].Value = SERIAL_no;
+             comm.Parameters[2].Value = CAND_name;
+             comm.Parameters[3].Value = EXP_year;
+             comm.Parameters[4].Value = ADD_credit;
+             comm.Parameters[5].Value = Remarks;
+             comm.ExecuteNonQuery();
+
+         }
+         catch
+         {
+             if (comm.Transaction != null)
+             {
+                 comm.Transaction.Rollback();
+             }
+         }
+         finally
+         {
+             con.Close();
+         }
+    }
+
+    private void Reset()
+    {
+        Text_Num.Text = "";
+        Text_Position.Text = "";
+        Text_Report_to.Text = "";
+        Text_Justific.Text = "";
+        DropDownList2.SelectedValue = "0";
+        Label_Messages.Text = "";
+        Label_Messages0.Text = "";
+        RadioButtonList1.SelectedValue = "";
+        CheckAccount();
+
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            if (row.RowType == DataControlRowType.DataRow)
+            {
+                ((TextBox)row.FindControl("TextBox_RF_NO")).Text    = ""; 
+                ((TextBox)row.FindControl("Text_SERIAL_NO")).Text   = "";
+                ((TextBox)row.FindControl("Text_CAND_NAME")).Text   = "";
+                ((TextBox)row.FindControl("Text_EXP_YEAR")).Text    = "";
+                ((TextBox)row.FindControl("Text_ADD_CREDIT")).Text  = "";
+                ((TextBox)row.FindControl("Text_REMARKS")).Text     = "";
+            }
+        }
+    }
+    public void CheckAccount()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+        string sql = "SELECT MAX(RF_NO)+1 FROM RECRUITMENT_FORM";
+
+        OdbcConnection conn = new OdbcConnection(connectionString);
+        OdbcCommand cmd = new OdbcCommand(sql, conn);
+
+        cmd.Connection.Open();
+        OdbcDataReader read = cmd.ExecuteReader();
+        read.Read();
+
+        if (read.HasRows)
+        {
+            Text_Num.Text = read[0].ToString();
+        }
+        else
+        {
+            Text_Num.Text ="1";
+        }
+        cmd.Connection.Close();
+    }
+
+    private void getMenu()
+    {
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        rootCfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/petroneeds");
+        connection = rootCfg.ConnectionStrings.ConnectionStrings["petroneedsConnectionString2"].ConnectionString.ToString();
+
+        conn = new SqlConnection(connection);
+        conn.ConnectionString = connection;
+        conn.Open();
+
+
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+
+        //string sql = "Select * from tbl_WebMenu";
+        string sql = "Select * from tbl_WebMenu INNER JOIN User_Check ON (tbl_WebMenu.MenuID = User_Check.MenuID)" +
+            //"AND (User_Check.MenuID = tbl_WebMenu.ParentID)" +
+                      "AND (User_Check.EmpNumber = '" + EMPLOYEE_NO + "' ) AND (User_Check.STATUS = '" + 1 + "')";
+
+        SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+        da.Fill(ds);
+        dt = ds.Tables[0];
+        DataRow[] drowpar = dt.Select("ParentID=" + 0);
+
+        foreach (DataRow dr in drowpar)
+        {
+            menuBar.Items.Add(new MenuItem(dr["MenuName"].ToString(),
+                    dr["MenuID"].ToString(), "",
+                    dr["MenuLocation"].ToString()));
+        }
+
+        foreach (DataRow dr in dt.Select("ParentID >" + 0))
+        {
+            MenuItem mnu = new MenuItem(dr["MenuName"].ToString(),
+                //dr["MenuID"].ToString(), "", dr["MenuLocation"] + "?EMPLOYEE_NO=" + EMPLOYEE_NO.ToString()); //dr["MenuID"].ToString(),"", dr["MenuLocation"].ToString());
+                             dr["MenuID"].ToString(), "", dr["MenuLocation"] + "?EMPLOYEE_NO=" + EMPLOYEE_NO.ToString() + "&DEP_NO=" + DEPARTMENT_NO.ToString()); //dr["MenuID"].ToString(),"", dr["MenuLocation"].ToString());
+            menuBar.FindItem(dr["ParentID"].ToString()).ChildItems.Add(mnu);
+        }
+        conn.Close();
+    }
+
+    //private void dataGridView()
+    //{
+    //    int rows = dataGridView1.Rows.Count;
+    //    for (int i = 0; i < rows; i++)
+    //    {
+    //        value1 = dataGridView1.Rows[i].Cells[0].Value.ToString();
+    //        value2 = dataGridView1.Rows[i].Cells[1].Value.ToString();
+    //        value3 = dataGridView1.Rows[i].Cells[2].Value.ToString();
+    //    }
+    //}
+}

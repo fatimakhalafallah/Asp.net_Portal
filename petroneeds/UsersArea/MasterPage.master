@@ -1,0 +1,490 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true"  CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Petroneeds Services International ::</title>
+    <link rel="icon" href="../images/favicon.gif" type="gif" />
+
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        td {
+	font-family: Verdana;
+	font-size: 14px;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a {
+	font-family: Verdana;
+	font-size: 13px;
+}
+.style1 {
+	color: #6c6459;
+	font-size: 12px;
+}
+        .style6
+        {
+            width: 600px;
+        }
+        .MenuBar
+        {
+            background-color: #AF0102;
+            font-size : 13px
+        }
+        .style7
+        {
+            width: 600px;
+        }
+        .style9
+        {
+            width: 150px;
+            text-align:left;
+            vertical-align:text-top;
+        }
+        .style10
+        {
+            width: 630px;
+        }
+        .style12
+        {
+            width: 180px;
+        }
+    </style>
+</head>
+<body bgcolor="#f4f2ef" background="../images/bg.png" >
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            <div align="center">
+                <table width="995" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="style12">
+                            <img src="../images/upline.png" width="235" height="2" /></td>
+                        <td class="style6">
+                            <img src="../images/upline.png" width="495" height="2" /></td>
+                    </tr>
+                    <tr>
+                        <td height="80" colspan="2" valign="bottom" bgcolor="#FFFFFF">
+                            <table width="995" height="80" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="style7">
+                                        <img src="../images/PSI.bmp" height="73" 
+                                            style="float: right; text-align: center; width: 94px;" />
+                                    </td>
+                                    <td width="653">
+                                        <div align="right">
+                                            <img src="../images/coName2.gif" width="632" 
+                  height="80" /></div>
+                                    </td>
+                                    <td width="250" valign="top">
+                                        <table width="250" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="94" height="42" valign="bottom">
+                                                    &nbsp;</td>
+                                                <td width="52" height="42" valign="bottom">
+                                                    <div align="center">
+                                                    </div>
+                                                </td>
+                                                <td width="52" height="42" valign="bottom">
+                                                    <div align="center">
+                                                        <a href="../default.aspx" target="_blank" 
+                      onmouseover="MM_swapImage('Image1','','images/ico_1.png',1)" 
+                      onmouseout="MM_swapImgRestore()">
+                                                        <img src="../images/ico_1.png" alt="Home" 
+                      name="Image1" width="52" height="40" border="0" id="Image4" title="Home" /></a></div>
+                                                </td>
+                                                <td width="52" height="42" valign="bottom">
+                                                    <div align="center">
+                                                        <asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="#B42125" 
+                                                            LoginImageUrl="~/images/icon_3.png" LogoutAction="RedirectToLoginPage" 
+                                                            LogoutImageUrl="~/images/icon_3.png" LogoutPageUrl="~/login.aspx" 
+                                                            onloggingout="LoginStatus1_LoggingOut1" title="Logout"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="150" colspan="2" bgcolor="#FFFFFF">
+                            <table width="995" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td height="150">
+                                        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="995" height="150">
+                                            <param name="movie" value="../images/head.swf" />
+                                            <param name="quality" value="high" />
+                                            <embed src="../images/head.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="995" height="150"></embed>
+      </object>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" bgcolor="#FFFFFF">
+                            <table width="995" border="0" cellspacing="0" cellpadding="0" 
+                                style="height: 0px">
+                                <tr>
+                                    <td>
+                                        <asp:ContentPlaceHolder id="ContentPlaceHolder4" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#FFFFFF" class="style12">
+                            &nbsp;</td>
+                        <td bgcolor="#FFFFFF" class="style6">
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" bgcolor="#FFFFFF" width="180px">
+                            <asp:ContentPlaceHolder id="ContentPlaceHolder3" runat="server">
+    <table border="0" cellpadding="0" cellspacing="0" style="width: 180px">
+        <tr>
+            <td colspan="2">
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/images/n_1.gif" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                HR Services:</td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="Link_Leave" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Link_Leave_Click">Leave Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="Link_Salary" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Link_Salary_Click">Salary Advance</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="Link_Recruitment" runat="server" CausesValidation="False" ForeColor="#B00000" 
+                    onclick="Link_Recruitment_Click">Recruitment</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                Administration:</td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="Link_Travel" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Link_Travel_Click">Travel Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="LinkTravel" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="LinkTravel_Click">Travel Migration Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="Link_Function" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Link_Function_Click">Function Request Information</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="Link_Stationary" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Link_Stationary_Click">Stationery Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+            </td>
+            <td>
+                <asp:LinkButton ID="Furniture_Link" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Furniture_Link_Click" >Furniture Request</asp:LinkButton>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+            </td>
+            <td>
+                <asp:LinkButton ID="Card_Link" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Card_Link_Click">Business card Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+            </td>
+            <td>
+                <asp:LinkButton ID="Vehicle_Link" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Vehicle_Link_Click" >Vehicle Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+            </td>
+            <td>
+                <asp:LinkButton ID="Link_report" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="Link_Function_Click">Report</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td width="5">
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td width="5">
+                &nbsp;</td>
+            <td>
+                ICT:
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="ICT_eq" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="ICT_eq_Click">Equipments Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="ICT_Account" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="ICT_Account_Click" >Account Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="ICT_Tele" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="ICT_Tele_Click1"> Telecommuncation Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:LinkButton ID="ICT_App" runat="server" CausesValidation="False" 
+                    ForeColor="#B00000" onclick="ICT_App_Click">Application Access Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+            </td>
+        </tr>
+    </table>
+                            </asp:ContentPlaceHolder>
+                        </td>
+                        <td valign="top" bgcolor="#FFFFFF" class="style6">
+                            <table cellpadding="0" cellspacing="0" class="style9">
+                                <tr>
+                                    <td class="style10">
+                                        <table border="0" cellspacing="0" cellpadding="0" align="left" 
+                                style="width: 573px; height: 23px;">
+                                            <tr>
+                                                <td width="630">
+                                                    <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+                                                    </asp:ContentPlaceHolder>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="150px">
+                                        <asp:ContentPlaceHolder id="ContentPlaceHolder5" runat="server">
+    <table cellpadding="0" cellspacing="0" class="style9">
+        <tr>
+            <td style="text-align: left; vertical-align: top" width="150px">
+            </td>
+        </tr>
+    </table>
+                                        </asp:ContentPlaceHolder>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" bgcolor="#FFFFFF">
+                            <img src="../images/line.jpg" width="995" height="5" /></td>
+                    </tr>
+                    <tr>
+                        <td height="130" colspan="2" bgcolor="#F4F2EF">
+                            <table width="995" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        <div align="left">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        <div align="right">
+                                            <a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image22','','../images/top.png',1)">
+                                            </a>
+                                            <img src="../images/logo.png" width="26" height="26" 
+                                                title="Petroneeds Services International" /></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12">
+                                        <div align="center" class="style1">
+                                            Copyright © 1997 - 2013 Petroneeds Services International. All Rights Reserved.
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,680 @@
+﻿<%@ Page Title="Recruitment Request Form" Language="C#" MasterPageFile="~/UsersArea/MasterPage.master" AutoEventWireup="true" CodeFile="Copy of Recruitment.aspx.cs" Inherits="UsersArea_Recruitment" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+
+        .style61
+        {
+            width: 399px;
+        }
+        .style63
+    {
+        width: 100px;
+    }
+        .style64
+        {
+            height: 20px;
+        }
+        .style68
+        {
+            height: 20px;
+            }
+        .style72
+        {
+            height: 17px;
+        }
+        .style73
+        {
+            height: 17px;
+        }
+        .style30
+        {
+            width: 576px;
+        }
+        .style76
+        {
+            height: 25px;
+        }
+        .style81
+        {
+            height: 82px;
+        }
+        .style85
+        {
+            width: 224px;
+        }
+        .style88
+        {
+            width: 138px;
+        }
+        .style90
+        {
+            width: 130px;
+        }
+        .style91
+        {
+            width: 219px;
+            height: 25px;
+        }
+        .style93
+        {
+            height: 20px;
+            width: 45px;
+        }
+        .style94
+        {
+            height: 17px;
+            width: 45px;
+        }
+        .style100
+        {
+            width: 127px;
+            height: 17px;
+        }
+        .style101
+        {
+            width: 127px;
+        }
+        .style103
+        {
+            width: 138px;
+            height: 17px;
+        }
+        .style107
+        {
+            width: 345px;
+            height: 25px;
+        }
+        .style108
+        {
+            width: 345px;
+        }
+        .style109
+        {
+            height: 25px;
+            width: 47px;
+        }
+        .style110
+        {
+            width: 47px;
+        }
+        .style111
+        {
+            width: 97px;
+            height: 25px;
+        }
+        .style112
+        {
+            width: 97px;
+            height: 82px;
+        }
+        .style113
+        {
+            width: 97px;
+        }
+        .style114
+        {
+            width: 138px;
+            height: 10px;
+        }
+        .style115
+        {
+            width: 127px;
+            height: 10px;
+        }
+        .style116
+        {
+            height: 10px;
+        }
+        .style117
+        {
+            width: 138px;
+            height: 23px;
+        }
+        .style118
+        {
+            width: 127px;
+            height: 23px;
+        }
+        .style119
+        {
+            height: 23px;
+        }
+        .style120
+        {
+            width: 219px;
+        }
+        .style121
+        {
+            height: 25px;
+            width: 10px;
+        }
+        .style122
+        {
+            width: 10px;
+        }
+        .style123
+        {
+            width: 303%;
+        }
+        </style>
+</asp:Content>
+<asp:Content ID="Content2" runat="server" 
+    contentplaceholderid="ContentPlaceHolder2">
+    <table cellpadding="0" cellspacing="0" class="style7" 
+        style="height: 160px; width: 384px">
+    <tr>
+        <td colspan="2">
+            <b style="mso-bidi-font-weight:normal">
+                <asp:Image ID="Image18" runat="server" ImageUrl="~/images/na_11.gif" />
+            </b></td>
+        <td class="style85">
+            </td>
+    </tr>
+    <tr>
+        <td class="style68">
+            <asp:Label ID="Label16" runat="server" Text="General Information" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+        </td>
+        <td class="style93">
+        </td>
+        <td class="style64">
+        </td>
+    </tr>
+    <tr>
+        <td class="style68" colspan="2">
+                    <table cellpadding="0" cellspacing="0" class="style30" __designer:mapid="182">
+                        <tr __designer:mapid="183">
+                            <td class="style91" __designer:mapid="188">
+            <asp:Label ID="Label27" runat="server" Text="Recruitment  Type" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style76" __designer:mapid="189">
+            <asp:DropDownList ID="DropDownList2" runat="server" ForeColor="#6C6459" 
+                    Height="25px" AutoPostBack="True" 
+                                    onselectedindexchanged="DropDownList2_SelectedIndexChanged">
+                <asp:ListItem Selected="True" Text="<<<Select>>>" Value="0">&lt;&lt;&lt;Select&gt;&gt;&gt;</asp:ListItem>
+                <asp:ListItem Value="1">Recruitment Request Form (RRF)</asp:ListItem>
+                <asp:ListItem Value="2">Recruitment Form Definite Period (RFDP)</asp:ListItem>
+            </asp:DropDownList>
+                            </td>
+                            <td class="style121" __designer:mapid="18a">
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                    ControlToValidate="DropDownList2" ErrorMessage="*" ForeColor="#CC0000" 
+                    InitialValue="0" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr __designer:mapid="18b">
+                            <td class="style91" __designer:mapid="190">
+            <asp:Label ID="Label26" runat="server" Text="No" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style76" __designer:mapid="191">
+            <asp:TextBox ID="Text_Num" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="80px" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
+                            </td>
+                            <td class="style121" __designer:mapid="192">
+                                </td>
+                        </tr>
+                        <tr __designer:mapid="193">
+                            <td class="style91" __designer:mapid="198">
+            <asp:Label ID="Label17" runat="server" Text="Data" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style76" __designer:mapid="199">
+            <asp:TextBox ID="Text_Date" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="140px" BorderWidth="1px" ReadOnly="True" 
+                    EnableTheming="True"></asp:TextBox>
+                            </td>
+                            <td class="style121" __designer:mapid="19a">
+                                </td>
+                        </tr>
+                        <tr __designer:mapid="19b">
+                            <td class="style91" __designer:mapid="1a0">
+            <asp:Label ID="Label18" runat="server" Text="Position to be Filled" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style76" __designer:mapid="1a2">
+            <asp:TextBox ID="Text_Position" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="262px" BorderWidth="1px"></asp:TextBox>
+                            </td>
+                            <td class="style121" __designer:mapid="1a3">
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                    ControlToValidate="Text_Position" ErrorMessage="*" ForeColor="#CC0000" 
+                    SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr __designer:mapid="1aa">
+                            <td class="style91" __designer:mapid="1ad">
+            <asp:Label ID="Label19" runat="server" 
+                    Text="Availability on Organization Chart" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style76" __designer:mapid="1ae">
+            <asp:RadioButtonList ID="RadioButtonList1" runat="server" Height="16px" 
+                    RepeatDirection="Horizontal" Width="261px">
+                <asp:ListItem Value="0">Vacant</asp:ListItem>
+                <asp:ListItem Value="1">Not Available</asp:ListItem>
+            </asp:RadioButtonList>
+                            </td>
+                            <td class="style121" __designer:mapid="1af">
+                                </td>
+                        </tr>
+                        <tr __designer:mapid="1b0">
+                            <td class="style120" __designer:mapid="1b4">
+            <asp:Label ID="Label21" runat="server" Text="Department" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style90" __designer:mapid="1b5">
+            <asp:DropDownList ID="DropDownList1" runat="server" ForeColor="#6C6459" 
+                    Height="28px">
+                <asp:ListItem Selected="True" Text="<<<Select>>>" Value="0">&lt;&lt;&lt;Select&gt;&gt;&gt;</asp:ListItem>
+            </asp:DropDownList>
+                            </td>
+                            <td class="style122" __designer:mapid="1b6">
+                                &nbsp;</td>
+                        </tr>
+                        <tr __designer:mapid="1b0">
+                            <td class="style120" __designer:mapid="1b4">
+            <asp:Label ID="Label23" runat="server" 
+                    Text="Justification for the Position Urgency" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style90" __designer:mapid="1b5">
+                                <table cellpadding="0" cellspacing="0" class="style123">
+                                    <tr>
+                                        <td>
+            <asp:TextBox ID="Text_Justific" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="303px" BorderWidth="1px" 
+                    Height="82px" TextMode="MultiLine" style="left: 28px"></asp:TextBox>
+                                        </td>
+                                        <td>
+            <asp:Label ID="Label_Charactor" runat="server" 
+                    Text="Less Than 100 Charactor" Font-Size="10px" 
+                    ForeColor="Maroon" Visible="False"></asp:Label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="style122" __designer:mapid="1b6">
+                                &nbsp;</td>
+                        </tr>
+                        <tr __designer:mapid="1b0">
+                            <td class="style120" __designer:mapid="1b4">
+            <asp:Label ID="Label24" runat="server" 
+                    Text="Number of Candidates" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            </td>
+                            <td class="style90" __designer:mapid="1b5">
+            <asp:RadioButtonList ID="RadioButtonList2" runat="server" Height="16px" 
+                    RepeatDirection="Horizontal" Width="261px">
+                <asp:ListItem Value="1">One</asp:ListItem>
+                <asp:ListItem Value="2">More than One</asp:ListItem>
+            </asp:RadioButtonList>
+                            </td>
+                            <td class="style122" __designer:mapid="1b6">
+                                &nbsp;</td>
+                        </tr>
+                        <tr __designer:mapid="1b0">
+                            <td class="style120" __designer:mapid="1b4">
+                                &nbsp;</td>
+                            <td class="style90" __designer:mapid="1b5">
+            <table cellpadding="0" cellspacing="0" class="style61" __designer:mapid="178">
+                <tr __designer:mapid="179">
+                    <td class="style117" __designer:mapid="17a">
+                        </td>
+                    <td class="style118" __designer:mapid="17b">
+                        </td>
+                    <td __designer:mapid="17c" class="style119">
+                <asp:Button ID="Butt_New" runat="server" Font-Names="Verdana" Font-Size="9pt" 
+                    Text="New" onclick="Butt_New_Click" Width="98px" style="margin-left: 0px" 
+                                Height="23px" />
+                       </td>
+                </tr>
+                <tr __designer:mapid="179">
+                    <td class="style114" __designer:mapid="17a">
+                        </td>
+                    <td class="style115" __designer:mapid="17b">
+                        </td>
+                    <td __designer:mapid="17c" class="style116">
+                       </td>
+                </tr>
+                <tr __designer:mapid="17d">
+                    <td class="style103" __designer:mapid="17e">
+                        &nbsp;</td>
+                    <td class="style100" __designer:mapid="17f">
+                        <table cellpadding="0" cellspacing="0" class="style63" __designer:mapid="180">
+                            <tr __designer:mapid="181">
+                                <td class="style96" __designer:mapid="18f">
+                                    &nbsp;</td>
+                                <td class="style96" __designer:mapid="184">
+                                   </td>
+                                <td class="style96" __designer:mapid="185">
+                                    &nbsp;</td>
+                            </tr>
+                        </table>
+                        </td>
+                    <td class="style72" __designer:mapid="187">
+                <asp:Button ID="Butt_Add_Details" runat="server" Font-Names="Verdana" Font-Size="9pt" 
+                    Text="Add Details" onclick="Butt_Add_Details_Click" Width="98px" style="margin-left: 0px" 
+                                Height="23px" />
+                        </td>
+                </tr>
+                <tr __designer:mapid="188">
+                    <td class="style88" __designer:mapid="189">
+                        &nbsp;</td>
+                    <td class="style101" __designer:mapid="18a">
+                        &nbsp;</td>
+                    <td __designer:mapid="18d">
+                        </td>
+                </tr>
+            </table>
+                            </td>
+                            <td class="style122" __designer:mapid="1b6">
+                                &nbsp;</td>
+                        </tr>
+                        <tr __designer:mapid="1b0">
+                            <td class="style120" __designer:mapid="1b4">
+                                &nbsp;</td>
+                            <td class="style90" __designer:mapid="1b5">
+                                &nbsp;</td>
+                            <td class="style122" __designer:mapid="1b6">
+                                &nbsp;</td>
+                        </tr>
+                    </table>
+        </td>
+        <td class="style64">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td class="style72">
+            &nbsp;</td>
+        <td class="style94">
+        </td>
+        <td class="style73">
+        </td>
+    </tr>
+    <tr>
+        <td class="style72" colspan="2">
+                    <asp:Panel ID="Panel1" runat="server">
+                        <table cellpadding="0" cellspacing="0" class="style30">
+                            <tr>
+                                <td class="style111">
+                                    <asp:Label ID="Label25" runat="server" Font-Size="12px" ForeColor="Maroon" 
+                                        Text="Candidates"></asp:Label>
+                                </td>
+                                <td class="style76">
+                                    &nbsp;</td>
+                                <td class="style109">
+                                    &nbsp;</td>
+                                <td class="style107">
+                                    &nbsp;</td>
+                                <td class="style76">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="style111">
+                                    <asp:Label ID="Label30" runat="server" Font-Size="12px" ForeColor="Maroon" 
+                                        Text="No"></asp:Label>
+                                </td>
+                                <td class="style76">
+                                    <asp:TextBox ID="Text_Num2" runat="server" BorderColor="#B00000" 
+                                        BorderStyle="Solid" BorderWidth="1px" ReadOnly="True" Width="66px"></asp:TextBox>
+                                </td>
+                                <td class="style109">
+                                </td>
+                                <td class="style107">
+                                </td>
+                                <td class="style76">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="style111">
+                                    <asp:Label ID="Label28" runat="server" Font-Size="12px" ForeColor="Maroon" 
+                                    Text="Candidate"></asp:Label>
+                                </td>
+                                <td class="style76">
+                                    <asp:TextBox ID="Text_Candidate" runat="server" BorderColor="#B00000" 
+                                    BorderStyle="Solid" BorderWidth="1px" Height="21px" MaxLength="50" 
+                                        Width="250px"></asp:TextBox>
+                                </td>
+                                <td class="style109">
+                                </td>
+                                <td class="style107">
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                                        ControlToValidate="Text_Candidate" ErrorMessage="*" ForeColor="#CC0000" 
+                                        SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                </td>
+                                <td class="style76">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="style111">
+                                    <asp:Label ID="Label31" runat="server" Font-Size="12px" ForeColor="Maroon" 
+                                    Text="Experience"></asp:Label>
+                                </td>
+                                <td class="style76">
+                                    <asp:TextBox ID="Text_Experience" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="250px" BorderWidth="1px" 
+                                    MaxLength="20" Rows="1">0</asp:TextBox>
+                                </td>
+                                <td class="style109">
+                                </td>
+                                <td class="style107">
+                                    <asp:RangeValidator ID="RangeValidator1" runat="server" 
+                                        ControlToValidate="Text_Experience" ErrorMessage="Insert No" 
+                                        Font-Overline="False" Font-Size="10px" ForeColor="Maroon" 
+                                        MaximumValue="2147483647" MinimumValue="0" SetFocusOnError="True" 
+                                        Type="Integer">Insert No</asp:RangeValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                        ControlToValidate="Text_Experience" ErrorMessage="*" Font-Size="10px" 
+                                        ForeColor="Maroon" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                </td>
+                                <td class="style76">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="style112">
+                                    <asp:Label ID="Label32" runat="server" Text="Credits" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                                </td>
+                                <td class="style81" colspan="3">
+                                    <asp:TextBox ID="Text_Description" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="361px" BorderWidth="1px" Height="83px" TextMode="MultiLine" 
+                                    MaxLength="5" Rows="2" Columns="1"></asp:TextBox>
+                                    <asp:Label ID="Label_Chractor1" runat="server" Font-Size="10px" 
+                                        ForeColor="Maroon" Text="Less than 100 Chractor" Visible="False"></asp:Label>
+                                </td>
+                                <td class="style81">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="style112">
+                                    <asp:Label ID="Label33" runat="server" Font-Size="12px" ForeColor="Maroon" 
+                                        Text="Remarks"></asp:Label>
+                                </td>
+                                <td class="style81" colspan="3">
+                                    <asp:TextBox ID="Text_Remarks" runat="server" BorderColor="#B00000" 
+                                    BorderStyle="Solid" BorderWidth="1px" Height="83px" MaxLength="100" 
+                                        Width="358px" TextMode="MultiLine"></asp:TextBox>
+                                    <asp:Label ID="Label_Chractor2" runat="server" Font-Size="10px" 
+                                        ForeColor="Maroon" Text="Less than 100 Chractor" Visible="False"></asp:Label>
+                                </td>
+                                <td class="style81">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="style113">
+                                    &nbsp;</td>
+                                <td class="style88">
+                                    <asp:Label ID="Label_Messages" runat="server" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                                </td>
+                                <td class="style110">
+                                    &nbsp;</td>
+                                <td class="style108">
+                                    &nbsp;</td>
+                                <td class="style46">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="style113">
+                                    &nbsp;</td>
+                                <td class="style88">
+                                    &nbsp;</td>
+                                <td class="style110">
+                                    &nbsp;</td>
+                                <td class="style108">
+                                    &nbsp;</td>
+                                <td class="style46">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="style113">
+                                    &nbsp;</td>
+                                <td class="style88">
+                                    <table cellpadding="0" cellspacing="0" class="style61">
+                                        <tr>
+                                            <td class="style88">
+                                                &nbsp;</td>
+                                            <td class="style101">
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style103">
+                                            </td>
+                                            <td class="style100">
+                                                <table cellpadding="0" cellspacing="0" class="style63">
+                                                    <tr>
+                                                        <td class="style96">
+                                                            <asp:Button ID="Butt_Submit" runat="server" Font-Names="Verdana" 
+                                                                Font-Size="9pt" onclick="Submit_Click_Click" Text="Submit" Width="65px" 
+                                                                style="height: 22px" />
+                                                        </td>
+                                                        <td class="style96">
+                                                        </td>
+                                                        <td class="style96">
+                                                            <asp:Button ID="Butt_Reset" runat="server" CausesValidation="False" 
+                                                                Font-Names="Verdana" Font-Size="9pt" Height="22px" onclick="Butt_Reset_Click" 
+                                                                Text="Reset" Width="65px" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td class="style72">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="style88">
+                                                &nbsp;</td>
+                                            <td class="style101">
+                                                &nbsp;</td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="style110">
+                                    &nbsp;</td>
+                                <td class="style108">
+                                    &nbsp;</td>
+                                <td class="style46">
+                                    &nbsp;</td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+            </td>
+        <td class="style73">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td class="style72" colspan="3">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td class="style35" colspan="3">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+                    GridLines="None" Width="595px" 
+                    EnablePersistedSelection="True" ShowFooter="True" 
+                    ShowHeaderWhenEmpty="True" 
+                    style="margin-top: 7px" CellPadding="4" 
+                    ForeColor="#B00000" DataKeyNames="SERIAL_NO" DataMember="SERIAL_NO">
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:BoundField DataField="SERIAL_NO" FooterText="No" HeaderText="No" />
+                        <asp:BoundField DataField="CAND_NAME" FooterText="Cand Name" 
+                            HeaderText="Cand Name" />
+                        <asp:BoundField DataField="EXP_YEAR" FooterText="Experience" 
+                            HeaderText="Experience" />
+                        <asp:BoundField DataField="ADD_CREDIT" FooterText="Candidates" 
+                            HeaderText="Candidates" />
+                        <asp:BoundField DataField="REMARKS" FooterText="Remarks" HeaderText="Remarks" />
+                    </Columns>
+                    <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BorderColor="#B00000" BorderStyle="Solid" Font-Bold="True" 
+                        Font-Size="13px" ForeColor="White" BackColor="#990000" />
+                    <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                    <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+                    <SortedAscendingCellStyle BackColor="#FDF5AC" />
+                    <SortedAscendingHeaderStyle BackColor="#4D0000" />
+                    <SortedDescendingCellStyle BackColor="#FCF6C0" />
+                    <SortedDescendingHeaderStyle BackColor="#820000" />
+
+<SortedAscendingCellStyle BackColor="#FDF5AC"></SortedAscendingCellStyle>
+
+<SortedAscendingHeaderStyle BackColor="#4D0000"></SortedAscendingHeaderStyle>
+
+<SortedDescendingCellStyle BackColor="#FCF6C0"></SortedDescendingCellStyle>
+
+<SortedDescendingHeaderStyle BackColor="#820000"></SortedDescendingHeaderStyle>
+                </asp:GridView>
+        </td>
+    </tr>
+    <tr>
+        <td class="style8" colspan="3">
+            &nbsp;</td>
+    </tr>
+</table>
+</asp:Content>
+
+
+<asp:Content ID="Content3" runat="server" 
+    contentplaceholderid="ContentPlaceHolder4">
+     <div class="MenuBar">
+        <asp:Menu ID="menuBar" runat="server" BackColor="#B00000" BorderColor="White" 
+            ForeColor="White" Height="25px" 
+            Orientation="Horizontal" RenderingMode="Table" 
+            StaticEnableDefaultPopOutImage="False" style="text-align: center" Width="" 
+                                                
+            DynamicEnableDefaultPopOutImage="False" DynamicVerticalOffset="2" 
+            ItemWrap="True">
+            <DynamicHoverStyle CssClass="DynamicHover" Font-Bold="False" BackColor="White" 
+                Font-Italic="True" Font-Names="Tahoma" Font-Size="13px" ForeColor="#B00000" />
+            <DynamicMenuItemStyle BackColor="#B00000" BorderColor="White" 
+                CssClass="DynamicMenuItem" ForeColor="White" Height="25px" 
+                HorizontalPadding="0px" ItemSpacing="0px" VerticalPadding="0px" Width="" 
+                Font-Italic="True" Font-Names="Tahoma" Font-Size="13px" />
+            <DynamicMenuStyle BorderColor="White" 
+                HorizontalPadding="0px" VerticalPadding="0px" />
+            <DynamicSelectedStyle CssClass="DynamicHover" />
+            <StaticHoverStyle CssClass="staticHover" ForeColor="White" Height="25px" 
+                Width="" />
+            <StaticMenuItemStyle BackColor="#B00000" BorderColor="#FFFFFF" 
+                CssClass="StaticMenuItem" Height="25px" HorizontalPadding="1px" 
+                ItemSpacing="0px" VerticalPadding="0px" Width="120px" Font-Bold="False" 
+                Font-Italic="True" Font-Names="Tahoma" Font-Size="13px" ForeColor="White" />
+            <StaticMenuStyle BackColor="#B00000" BorderColor="White" Height="25px" 
+                Width="" />
+            <StaticSelectedStyle BackColor="#B00000" BorderColor="White" 
+                CssClass="staticHover" Font-Names="Tahoma" Font-Size="13px" Height="25px" 
+                HorizontalPadding="0px" ItemSpacing="0px" VerticalPadding="0px" Width="" 
+                Font-Italic="True" />
+        </asp:Menu>
+    </div>
+</asp:Content>
+
+
+

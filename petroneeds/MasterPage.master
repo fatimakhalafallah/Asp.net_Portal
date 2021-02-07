@@ -1,0 +1,446 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Petroneeds Services International :: </title>
+    <meta name="Keywords" content="Petroneeds Services International,Petroneeds,Petroleum in sudan,Petroleum company in sudan,Petroneeds in Sudan" />
+<meta name="description" content="Petroneeds Services International"/>
+<link rel="icon" href="images/favicon.gif" type="gif" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    <style type="text/css">
+        td {
+	font-family: Verdana;
+	font-size: 13px;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+a:link {
+	color: #6c6459;
+	text-decoration: none;
+}
+a {
+	font-family: Tahoma;
+	font-size: 13px;
+}
+        .style9
+        {
+            width: 500px;
+            font-family: Tahoma;
+            font-size: 13px;
+            text-align:justify;
+        }
+        .style11
+        {
+            width: 230px;
+        }
+        .style12
+        {
+            text-align: left;
+        }
+        .style13
+        {
+            height: 130px;
+        }
+    .style5 {
+	color: #b00000;
+	font-size: 13px;
+}
+    .style1 {
+	color: #6c6459;
+	font-size: 12px;
+}
+    </style>
+    <script src="SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+    function MM_preloadImages() { //v3.0
+        var d = document; if (d.images) {
+            if (!d.MM_p) d.MM_p = new Array();
+            var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; } 
+        }
+    }
+    function MM_findObj(n, d) { //v4.01
+        var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+            d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+        }
+        if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+        for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+        if (!x && d.getElementById) x = d.getElementById(n); return x;
+    }
+    function MM_swapImgRestore() { //v3.0
+        var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+    function MM_swapImage() { //v3.0
+        var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+            if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+//-->
+</script>
+<link href="SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
+</head>
+<body bgcolor="#f4f2ef" background="images/bg.png" >
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            <div align="center">
+                <table width="995" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <img src="images/upline.png" width="235" height="4" /></td>
+                        <td class="style6">
+                            <img src="images/upline.png" width="495" height="4" /></td>
+                        <td width="250">
+                            <img src="images/upline.png" width="250" height="4" /></td>
+                    </tr>
+                    <tr>
+                        <td height="80" colspan="2" valign="bottom" bgcolor="#FFFFFF">
+                            <div align="left">
+                                <table width="745" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="90">
+                                            <div align="right">
+                                                <img src="images/PSI.bmp" 
+                                                    onclick="MM_popupMsg('Petroneeds Services International')" 
+                                                    style="width: 80px; height: 80px" /></div>
+                                        </td>
+                                        <td width="632">
+                                            <img src="images/coName2.gif" width="632" height="80" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td width="250" height="80" valign="top" bgcolor="#FFFFFF">
+                            <table width="250" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="94" height="42" valign="bottom">
+                                        &nbsp;</td>
+                                    <td width="52" height="42" valign="bottom">
+                                        <div align="center">
+                                            <a href="Default.aspx" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image1','','images/ico_1.png',1)">
+                                            <img src="images/ico_1.png" alt="Home" name="Image1" width="52" height="40" border="0" id="Image1" title="Home" /></a></div>
+                                    </td>
+                                    <td width="52" height="42" valign="bottom">
+                                        <div align="center">
+                                            <a href="https://mail.petroneed.com.sd" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image2','','images/ico_2.png',1)">
+                                            <img src="images/ico_2.png" alt="E-mail" name="Image2" width="52" height="40" border="0" id="Image2" title="E-mail" /></a></div>
+                                    </td>
+                                    <td width="52" height="42" valign="bottom">
+                                        <div align="center">
+                                            <a href="login.aspx" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image3','','images/icon_3.png',1)">
+                                            <img src="images/icon_3.png" alt="Login" name="Image3" width="52" height="40" border="0" id="Image3" title="Login" /></a></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <td>
+                    </td>
+                    <tr>
+                        <td height="150" colspan="3" bgcolor="#FFFFFF">
+                            <table width="995" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td height="150">
+                                        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="995" height="150">
+                                            <param name="movie" value="images/head.swf" />
+                                            <param name="quality" value="high" />
+                                            <embed src="images/head.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="995" height="150"></embed>
+      </object>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" bgcolor="#FFFFFF">
+                            <asp:ContentPlaceHolder id="ContentPlaceHolder4" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#FFFFFF">
+                            &nbsp;</td>
+                        <td bgcolor="#FFFFFF" class="style6">
+                            &nbsp;</td>
+                        <td width="250" bgcolor="#FFFFFF">
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" bgcolor="#FFFFFF">
+                            <asp:ContentPlaceHolder id="ContentPlaceHolder3" runat="server">
+    <table border="0" cellpadding="0" cellspacing="0" class="style11">
+        <tr>
+            <td class="style12">
+                &nbsp;</td>
+            <td class="style12">
+                &nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style12">
+                &nbsp;</td>
+            <td class="style12">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style12">
+                &nbsp;</td>
+            <td class="style12">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td width="5" class="style12">
+                &nbsp;</td>
+            <td class="style12">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td width="5" class="style12">
+                &nbsp;</td>
+            <td class="style12">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td width="5" class="style12">
+                &nbsp;</td>
+            <td class="style12">
+                &nbsp;</td>
+        </tr>
+    </table>
+                            </asp:ContentPlaceHolder>
+                        </td>
+                        <td valign="top" bgcolor="#FFFFFF" class="style6" colspan="2">
+                            <table border="0" cellspacing="0" cellpadding="0" style="width: 747px">
+                                <tr>
+                                    <td width="5">
+                                        &nbsp;</td>
+                                    <td class="style9">
+                                        <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                    </td>
+                                    <td width="5">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="5">
+                                        &nbsp;</td>
+                                    <td class="style9">
+                                        &nbsp;</td>
+                                    <td width="5">
+                                        &nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#FFFFFF">
+                            &nbsp;</td>
+                        <td bgcolor="#FFFFFF" class="style6">
+                            &nbsp;</td>
+                        <td width="250" bgcolor="#FFFFFF">
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" bgcolor="#FFFFFF">
+                            <img src="images/line.jpg" width="995" height="5" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" bgcolor="#F4F2EF" class="style13">
+                            <table width="995" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td>
+                                        <div align="left">
+                                            <span class="style5"><a href="Default.aspx">Home</a></span></div>
+                                    </td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td class="style5">
+                                        <div align="left">
+                                            <a href="welcom.aspx">Welcome</a></div>
+                                    </td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td class="style5">
+                                        <div align="left">
+                                            <a href="polices.aspx">Policies</a></div>
+                                    </td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td class="style5">
+                                        <div align="left">
+                                            <a href="Events.aspx">News &amp; Events</a></div>
+                                    </td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td class="style5">
+                                        <div align="left">
+                                            <a href="staff.aspx">Staff Zone</a></div>
+                                    </td>
+                                    <td>
+                                        &nbsp;</td>
+                                    <td class="style5">
+                                        <div align="left">
+                                            <a href="e_services.aspx">E-Services</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        &nbsp;</td>
+                                    <td width="20">
+                                        &nbsp;</td>
+                                    <td width="150">
+                                        <img src="images/logo.png" width="22" height="26" 
+                                            title="Petroneeds Services International" style="float: right" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12">
+                                        <div align="center" class="style1">
+                                            Copyright © 1997 - 2013 Petroneeds Services International. All Rights Reserved.
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    <script type="text/javascript">
+<!--
+        var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+//-->
+</script>
+</body>
+</html>

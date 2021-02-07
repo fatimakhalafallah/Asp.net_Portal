@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<book genre='novel' ISBN='1-861003-78' misc='sale-item'>
+  <details>
+    <name>Mohamed Abdalla</name>
+    <address>Khartoum</address>
+    <jopname>Software Devoloper</jopname>
+    <age>33</age>
+
+    <name>Mohamed Abdalla</name>
+    <address>Khartoum</address>
+    <jopname>Software Devoloper</jopname>
+    <age>33</age>
+
+    <name>Mohamed Abdalla</name>
+    <address>Khartoum</address>
+    <jopname>Software Devoloper</jopname>
+    <age>33</age>
+    
+  </details>
+</book>

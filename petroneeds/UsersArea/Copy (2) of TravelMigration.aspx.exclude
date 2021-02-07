@@ -1,0 +1,373 @@
+﻿<%@ Page Title="Petroneeds Services International :: Accommodation, Travel & Migration Request" Language="C#" MasterPageFile="~/UsersArea/MasterPage.master" AutoEventWireup="true" CodeFile="Copy (2) of TravelMigration.aspx.cs" Inherits="UsersArea_TravelMigration" %>
+
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .style10
+    {
+        width: 120px;
+    }
+    .style11
+    {
+            width: 196px;
+        }
+    .style12
+    {
+            width: 434px;
+            height: 17px;
+        }
+    .style14
+    {
+        height: 17px;
+    }
+        .style15
+        {
+            width: 196px;
+            height: 25px;
+        }
+        .style16
+        {
+            width: 116px;
+            height: 18px;
+        }
+        .style17
+        {
+            width: 116px;
+            height: 25px;
+        }
+        .style19
+    {
+        height: 25px;
+    }
+        .style20
+        {
+            height: 17px;
+        }
+        .style22
+        {
+            height: 17px;
+            }
+        .style23
+        {
+            width: 36px;
+        }
+        .style24
+        {
+            width: 36px;
+            height: 25px;
+        }
+        .style25
+        {
+            width: 100%;
+        }
+        .style26
+        {
+            width: 90px;
+        }
+        .style27
+        {
+            width: 296px;
+        }
+        .style28
+        {
+            width: 43px;
+        }
+        .style29
+        {
+            width: 296px;
+            height: 17px;
+        }
+        .style30
+        {
+            width: 43px;
+            height: 17px;
+        }
+        .style31
+        {
+            width: 90px;
+            height: 17px;
+        }
+        </style>
+</asp:Content>
+<asp:Content ID="Content2" runat="server" 
+    contentplaceholderid="ContentPlaceHolder2">
+    <table cellpadding="0" cellspacing="0" class="style7">
+        <tr>
+            <td colspan="3">
+                <b style="mso-bidi-font-weight:normal">
+                <asp:Image ID="Image18" runat="server" ImageUrl="~/images/na_13.gif" />
+                </b>
+            </td>
+        </tr>
+        <tr>
+            <td class="style15">
+            </td>
+            <td class="style24">
+            </td>
+            <td class="style17">
+            </td>
+        </tr>
+        <tr>
+            <td class="style15">
+                <asp:Label ID="Label16" runat="server" Text="Number" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style24">
+                <asp:TextBox ID="Text_Num" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="66px" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td class="style19">
+            </td>
+        </tr>
+        <tr>
+            <td class="style15">
+                <asp:Label ID="Label14" runat="server" Text="Date" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style24">
+                <asp:TextBox ID="Text_Date" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="140px" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td class="style19">
+            </td>
+        </tr>
+        <tr>
+            <td class="style15">
+                <asp:Label ID="Label2" runat="server" Text="Employee Name" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style24">
+                <asp:TextBox ID="Text_Name" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="320px" BorderWidth="1px" MaxLength="50" 
+                    ReadOnly="True"></asp:TextBox>
+            </td>
+            <td class="style19">
+               </td>
+        </tr>
+        <tr>
+            <td class="style15">
+                <asp:Label ID="Label5" runat="server" Text="Department" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style24">
+                <asp:TextBox ID="Text_Department" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Outset" Width="190px" BorderWidth="1px" Height="20px" 
+                    ReadOnly="True"></asp:TextBox>
+            </td>
+            <td class="style19">
+                </td>
+        </tr>
+        <tr>
+            <td class="style15">
+                <asp:Label ID="Label20" runat="server" Text="Contractor Name" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style24">
+                <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" 
+                    Font-Names="Tahoma" Font-Size="12px" 
+                    onselectedindexchanged="DropDownList1_SelectedIndexChanged">
+                </asp:DropDownList>
+            </td>
+            <td class="style19">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style15">
+                <asp:Label ID="Label21" runat="server" Text="Contractor Section" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style24">
+                <asp:TextBox ID="Text_SectionName" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="320px" BorderWidth="1px" MaxLength="300"></asp:TextBox>
+            </td>
+            <td class="style19">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style15">
+                <asp:Label ID="Label22" runat="server" Text="Location" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style24">
+                <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" 
+                    Font-Names="Tahoma" Font-Size="12px" 
+                    onselectedindexchanged="DropDownList2_SelectedIndexChanged">
+                </asp:DropDownList>
+            </td>
+            <td class="style19">
+               </td>
+        </tr>
+        <tr>
+            <td class="style20">
+                <asp:Label ID="Label17" runat="server" Text="Remarks" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style22">
+                <asp:TextBox ID="Text_Remarks" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="320px" BorderWidth="1px" MaxLength="500" 
+                    Height="68px" TextMode="MultiLine"></asp:TextBox>
+            </td>
+            <td class="style14">
+                <asp:Label ID="Label18" runat="server" Font-Size="11px" 
+                    ForeColor="Maroon">Less than 500</asp:Label>
+               </td>
+        </tr>
+        <tr>
+            <td class="style20">
+                &nbsp;</td>
+            <td class="style22" colspan="2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style20" colspan="3">
+                <table cellpadding="0" cellspacing="0" class="style25">
+                    <tr>
+                        <td class="style29">
+                <asp:Label ID="Label7" runat="server" Text="Services Requested" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                        </td>
+                        <td class="style30">
+                            
+                
+                <asp:Label ID="Label23" runat="server" Text="From" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                            
+                
+                        </td>
+                        <td class="style31">
+                <asp:Label ID="Label24" runat="server" Text="To" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                
+                        </td>
+                        <td class="style14">
+                
+                <asp:Label ID="Label25" runat="server" Text="Remark" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                
+                           </td>
+                    </tr>
+                    <tr>
+                        <td class="style27">
+                <asp:CheckBoxList ID="CheckBoxList1" runat="server" Height="27px">
+                </asp:CheckBoxList>
+                        </td>
+                        <td class="style28">
+                            
+                            <asp:PlaceHolder ID="PlaceHolder1" runat="server">
+                            <asp:TextBox ID="TextBox1" runat="server" BorderStyle="Solid" Width="120px" BorderWidth="1px" ></asp:TextBox>
+                            </asp:PlaceHolder>
+                        </td>
+                        <td class="style26">
+                            <asp:PlaceHolder ID="PlaceHolder2" runat="server">
+                            <asp:TextBox ID="TextBox2" runat="server" BorderStyle="Solid" Width="120px" BorderWidth="1px" ></asp:TextBox>
+                          </asp:PlaceHolder>
+                           </td>
+                        <td>
+                            <asp:PlaceHolder ID="PlaceHolder3" runat="server">
+                            <asp:TextBox ID="TextBox3" BorderStyle="Solid" Width="160px" BorderWidth="1px" TextMode="MultiLine" Height="24px"  runat="server"></asp:TextBox>
+                            </asp:PlaceHolder>
+                            </td>
+                    </tr>
+                    </table>
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="style20">
+                &nbsp;</td>
+            <td class="style22">
+                &nbsp;</td>
+            <td class="style14">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style14">
+                </td>
+            <td class="style14">
+                <asp:Label ID="Label_Messages" runat="server" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style14">
+                </td>
+        </tr>
+        <tr>
+            <td class="style16" colspan="3">
+              </td>
+        </tr>
+        <tr>
+            <td class="style11">
+                &nbsp;</td>
+            <td class="style10" colspan="2">
+                <asp:Label ID="Label19" runat="server" Font-Names="Tahoma" Font-Size="12px" 
+                    Text="Please make sure to submit all supporting documents"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td class="style11">
+                &nbsp;</td>
+            <td class="style10" colspan="2">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style11">
+                &nbsp;</td>
+            <td class="style10" colspan="2">
+                <asp:Button ID="Butt_Submit" runat="server" Font-Names="Verdana" Font-Size="9pt" 
+                    Text="Submit" onclick="Butt_Submit_Click" Width="65px" />
+                    <asp:Button ID="Butt_Reset" runat="server" Font-Names="Verdana" Font-Size="9pt" 
+                    Text="Reset" CausesValidation="False" onclick="Butt_Reset_Click" 
+                    Width="65px" />
+            </td>
+        </tr>
+        <tr>
+            <td class="style11">
+                </td>
+            <td class="style23">
+                    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+                    </asp:ToolkitScriptManager>
+            </td>
+            <td class="style29">
+            </td>
+        </tr>
+        </table>
+</asp:Content>
+
+
+<asp:Content ID="Content3" runat="server" 
+    contentplaceholderid="ContentPlaceHolder4">
+     <div class="MenuBar">
+        <asp:Menu ID="menuBar" runat="server" BackColor="#B00000" BorderColor="White" 
+            ForeColor="White" Height="25px" 
+            Orientation="Horizontal" RenderingMode="Table" 
+            StaticEnableDefaultPopOutImage="False" style="text-align: center" Width="" 
+                                                
+            DynamicEnableDefaultPopOutImage="False" DynamicVerticalOffset="2" 
+            ItemWrap="True">
+            <DynamicHoverStyle CssClass="DynamicHover" Font-Bold="False" BackColor="White" 
+                Font-Italic="True" Font-Names="Tahoma" Font-Size="13px" ForeColor="#B00000" />
+            <DynamicMenuItemStyle BackColor="#B00000" BorderColor="White" 
+                CssClass="DynamicMenuItem" ForeColor="White" Height="25px" 
+                HorizontalPadding="0px" ItemSpacing="0px" VerticalPadding="0px" Width="" 
+                Font-Italic="True" Font-Names="Tahoma" Font-Size="13px" />
+            <DynamicMenuStyle BorderColor="White" 
+                HorizontalPadding="0px" VerticalPadding="0px" />
+            <DynamicSelectedStyle CssClass="DynamicHover" />
+            <StaticHoverStyle CssClass="staticHover" ForeColor="White" Height="25px" 
+                Width="" />
+            <StaticMenuItemStyle BackColor="#B00000" BorderColor="#FFFFFF" 
+                CssClass="StaticMenuItem" Height="25px" HorizontalPadding="1px" 
+                ItemSpacing="0px" VerticalPadding="0px" Width="120px" Font-Bold="False" 
+                Font-Italic="True" Font-Names="Tahoma" Font-Size="13px" ForeColor="White" />
+            <StaticMenuStyle BackColor="#B00000" BorderColor="White" Height="25px" 
+                Width="" />
+            <StaticSelectedStyle BackColor="#B00000" BorderColor="White" 
+                CssClass="staticHover" Font-Names="Tahoma" Font-Size="13px" Height="25px" 
+                HorizontalPadding="0px" ItemSpacing="0px" VerticalPadding="0px" Width="" 
+                Font-Italic="True" />
+        </asp:Menu>
+    </div>
+</asp:Content>
+
+
+

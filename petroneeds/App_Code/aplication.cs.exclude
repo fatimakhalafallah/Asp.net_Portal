@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Odbc;
+
+/// <summary>
+/// Summary description for Candidates
+/// </summary>
+public class aplication
+{
+    private string rF_NO;
+    private string sERIAL_nO;
+    private string cAND_nAME;
+    private string eXP_yEAR;
+    private string aDD_cREDIT;
+    private string rEMARKS;
+
+    public string REQ_RF_NO
+    {
+        get { return rF_NO; }
+        set { rF_NO = value; }
+    }
+
+    public string REQ_SERIAL_NO
+    {
+        get{return sERIAL_nO;  }
+        set{sERIAL_nO = value;  }
+    }
+
+    public string REQ_CAND_NAME
+    {
+        get { return cAND_nAME; }
+        set {cAND_nAME =value;}
+    }
+    public string REQ_EXP_YEAR
+    {
+        get { return eXP_yEAR; }
+        set { eXP_yEAR = value; } 
+    }
+
+    public string REQ_ADD_CREDIT
+    {
+        get { return aDD_cREDIT; }
+        set { aDD_cREDIT = value; }
+    }
+
+    public string REQ_REMARKS
+	{
+        get { return rEMARKS; }
+        set { rEMARKS = value; }
+	}
+}

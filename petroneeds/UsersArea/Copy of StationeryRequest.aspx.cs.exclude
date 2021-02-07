@@ -1,0 +1,370 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls;
+using System.Data.Odbc;
+using System.Configuration;
+using System.Drawing.Design;
+using System.Data.SqlClient;
+using System.Data;
+using System.Data.SqlTypes;
+using System.Data.Common;
+//using System.Windows.Forms;
+
+public partial class StationeryRequest : System.Web.UI.Page
+{
+    public OdbcCommand odbccomm = null;
+    public OdbcConnection odbccon = null;
+
+    private string connection = null;
+    protected System.Configuration.Configuration rootCfg = null;
+    protected System.Configuration.ConnectionStringSettings ConfigConString = null;
+
+    public SqlCommand sqlcomm = null;
+    public SqlConnection sqlconn = null;
+
+    public string EMPLOYEE_NO, DEPARTMENT_NO;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        if (EMPLOYEE_NO == "" || EMPLOYEE_NO == null && DEPARTMENT_NO == "" || DEPARTMENT_NO == null)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        else
+        {
+            if (!IsPostBack)
+            {
+                getMenu();
+                UserData();
+                Text_Date.Text = DateTime.Now.Date.ToString("dd-MMMM-yyyy");
+                BindGrid();
+                CheckAccount();
+            }
+        }
+    }
+    private void BindGrid()
+    {
+        List<stationary> itemsList = new List<stationary>(5);
+        for (int i = 0; i < 5; i++)
+        {
+            stationary apps = new stationary();
+            itemsList.Add(apps);
+        }
+
+        GridView1.DataSource = itemsList;
+        GridView1.DataBind();
+    }
+    protected void Butt_Submit_Click(object sender, EventArgs e)
+    {
+
+        //Add();
+        gridView();
+        //BeginAdd();
+        //foreach (GridViewRow row in GridView1.Rows)
+        //{
+        //    if (row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        string BRAN_NO = ((TextBox)row.FindControl("TextBox6")).Text;
+        //        string ITEM_NO = ((TextBox)row.FindControl("TextBox9")).Text;
+        //        string DESCRIPTION = ((TextBox)row.FindControl("TextBox7")).Text;
+        //        string QTY_ORDERED = ((TextBox)row.FindControl("TextBox8")).Text;
+
+        //        if (BRAN_NO != "")
+        //        {
+        //            AddData(BRAN_NO, ITEM_NO, DESCRIPTION, QTY_ORDERED);
+        //        }
+        //    }
+        //}
+        //CompleteAdd();
+        //Label_Messages.Text = "";
+        //foreach (GridViewRow row in GridView1.Rows)
+        //{
+        //    if (row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        ((TextBox)row.FindControl("TextBox6")).Text = "";
+        //        ((TextBox)row.FindControl("TextBox9")).Text = "";
+        //        ((TextBox)row.FindControl("TextBox7")).Text = "";
+        //        ((TextBox)row.FindControl("TextBox8")).Text = "";
+        //    }
+        //}
+    }
+
+    //private void BeginAdd()
+    //{
+    //    rootCfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/petroneeds");
+    //    connection = rootCfg.ConnectionStrings.ConnectionStrings["petroneedsConnectionString"].ConnectionString.ToString();
+
+    //    odbccon = new OdbcConnection(connection);
+    //    odbccon.ConnectionString = connection;
+
+    //    odbccon.Open();
+    //    OdbcTransaction tran = odbccon.BeginTransaction();
+    //    odbccomm.Connection = odbccon;
+    //    odbccomm.Transaction = tran;
+
+
+    //    odbccomm.CommandText = "INSERT INTO STOCK_REQUEST_DETAILS (BRAN_NO, ORDER_NO, ORDER_DATE, ITEM_NO, DESCRIPTION, QTY_ORDERED)" +
+    //        "VALUES(@BRAN_NO, @'" + Text_Num.Text + "', @'" + Text_Date.Text + "', @ITEM_NO, @DESCRIPTION, @QTY_ORDERED)";
+    //    OdbcParameter p1 = new OdbcParameter("@BRAN_NO", OdbcType.VarChar);
+    //    OdbcParameter p2 = new OdbcParameter("'" + Text_Num.Text + "'", OdbcType.VarChar);
+    //    OdbcParameter p3 = new OdbcParameter("'" + Text_Date.Text + "'", OdbcType.VarChar);
+    //    OdbcParameter p4 = new OdbcParameter("@ITEM_NO", OdbcType.VarChar);
+    //    OdbcParameter p5 = new OdbcParameter("@DESCRIPTION", OdbcType.VarChar);
+    //    OdbcParameter p6 = new OdbcParameter("@QTY_ORDERED", OdbcType.VarChar);
+
+    //    odbccomm.Parameters.Add(p1);
+    //    odbccomm.Parameters.Add(p2);
+    //    odbccomm.Parameters.Add(p3);
+    //    odbccomm.Parameters.Add(p4);
+    //    odbccomm.Parameters.Add(p5); 
+    //    odbccomm.Parameters.Add(p6);
+    //}
+    //private void CompleteAdd()
+    //{
+    //     try
+    //    {
+    //        odbccomm.Transaction.Commit();
+    //        Label_Messages.Text = "Added successfully!";
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Label_Messages.Text = "Error completing the operation!";
+    //    }
+    //    finally
+    //    {
+    //        odbccon.Close();
+    //    }
+    //}
+    //private void AddData(string BRAN_NO, string ITEM_NO, string DESCRIPTION, string QTY_ORDERED)
+    //   {
+    //    try
+    //    {
+    //        odbccomm.Parameters[0].Value = BRAN_NO;
+    //        //odbccomm.Parameters[1].Value = ORDER_NO;
+    //        //odbccomm.Parameters[2].Value = ORDER_DATE;
+    //        odbccomm.Parameters[1].Value = ITEM_NO;
+    //        odbccomm.Parameters[2].Value = DESCRIPTION;
+    //        odbccomm.Parameters[3].Value = QTY_ORDERED;
+    //        odbccomm.ExecuteNonQuery();
+    //    }
+    //    catch
+    //    {
+    //        if (odbccomm.Transaction != null)
+    //        {
+    //            odbccomm.Transaction.Rollback();
+    //        }
+    //    }
+    //}
+    private void Add()
+    {
+        rootCfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/petroneeds");
+        connection = rootCfg.ConnectionStrings.ConnectionStrings["petroneedsConnectionString"].ConnectionString.ToString();
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        OdbcCommand odbccomm = null;
+        OdbcConnection odbccon = null;
+        string sql;
+
+        odbccon = new OdbcConnection(connection);
+        odbccon.ConnectionString = connection;
+        odbccon.Open();
+
+        CheckAccount();
+        //sql = "INSERT INTO STOCK_REQUEST ([ORDER_NO] ,[ORDER_DATE], [STATUS], [CREATED_USER], [DEP_NO], [STORE_NO]) " +
+        //      "VALUES('" + Text_Num.Text + "' ,' " + Text_Date.Text + " ', '1', '" + EMPLOYEE_NO + "', '" + DEPARTMENT_NO + "', '4')";
+
+        sql = "INSERT INTO STOCK_REQUEST (ORDER_NO, ORDER_DATE, STATUS, CREATED_USER, DEP_NO, STORE_NO) " +
+              "VALUES('" + Text_Num.Text + "' ,' " + Text_Date.Text + " ', '1', '" + EMPLOYEE_NO + "', '" + DEPARTMENT_NO + "', '4')";
+        odbccomm = new OdbcCommand(sql, odbccon);
+        odbccomm.ExecuteNonQuery();
+        odbccon.Close();
+
+    }
+
+    protected void Butt_Reset_Click(object sender, EventArgs e)
+    {
+        Label_Messages.Text = "";
+        CheckAccount();
+        Reset_Items();
+    }
+
+    private void Reset_Items()
+    {
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            if (row.RowType == System.Web.UI.WebControls.DataControlRowType.DataRow)
+            {
+                ((TextBox)row.FindControl("TextBox6")).Text = "";
+                ((TextBox)row.FindControl("TextBox7")).Text = "";
+                ((TextBox)row.FindControl("TextBox8")).Text = "";
+                ((TextBox)row.FindControl("TextBox9")).Text = "";
+            }
+        }
+    }
+    private void getMenu()
+    {
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        rootCfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/petroneeds");
+        connection = rootCfg.ConnectionStrings.ConnectionStrings["petroneedsConnectionString2"].ConnectionString.ToString();
+
+        sqlconn = new SqlConnection(connection);
+        sqlconn.ConnectionString = connection;
+        sqlconn.Open();
+
+
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+
+        //string sql = "Select * from tbl_WebMenu";
+        string sql = "Select * from tbl_WebMenu INNER JOIN User_Check ON (tbl_WebMenu.MenuID = User_Check.MenuID)" +
+            //"AND (User_Check.MenuID = tbl_WebMenu.ParentID)" +
+                      "AND (User_Check.EmpNumber = '" + EMPLOYEE_NO + "' ) AND (User_Check.STATUS = '" + 1 + "')";
+
+        SqlDataAdapter da = new SqlDataAdapter(sql, sqlconn);
+        da.Fill(ds);
+        dt = ds.Tables[0];
+        DataRow[] drowpar = dt.Select("ParentID=" + 0);
+
+        foreach (DataRow dr in drowpar)
+        {
+            menuBar.Items.Add(new System.Web.UI.WebControls.MenuItem(dr["MenuName"].ToString(),
+                    dr["MenuID"].ToString(), "",
+                    dr["MenuLocation"].ToString()));
+        }
+
+        foreach (DataRow dr in dt.Select("ParentID >" + 0))
+        {
+            System.Web.UI.WebControls.MenuItem mnu = new System.Web.UI.WebControls.MenuItem(dr["MenuName"].ToString(),
+                //dr["MenuID"].ToString(), "", dr["MenuLocation"] + "?EMPLOYEE_NO=" + EMPLOYEE_NO.ToString()); //dr["MenuID"].ToString(),"", dr["MenuLocation"].ToString());
+                             dr["MenuID"].ToString(), "", dr["MenuLocation"] + "?EMPLOYEE_NO=" + EMPLOYEE_NO.ToString() + "&DEP_NO=" + DEPARTMENT_NO.ToString()); //dr["MenuID"].ToString(),"", dr["MenuLocation"].ToString());
+            menuBar.FindItem(dr["ParentID"].ToString()).ChildItems.Add(mnu);
+        }
+        sqlconn.Close();
+    }
+
+    public void UserData()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        string sql = "SELECT USERS_INFORMATIONS.FULL_USER_NAME, USERS_INFORMATIONS.EMAIL, DEPARTMENTS.DEP_NAME FROM USERS_INFORMATIONS INNER JOIN DEPARTMENTS ON (USERS_INFORMATIONS.DEP_NO = DEPARTMENTS.DEP_NO) AND USERS_INFORMATIONS.DEP_NO = '" + int.Parse(DEPARTMENT_NO) + "' WHERE USERS_INFORMATIONS.EMPLOYEE_NO = '" + int.Parse(EMPLOYEE_NO) + "'";
+
+        OdbcConnection conn = new OdbcConnection(connectionString);
+        OdbcCommand cmd = new OdbcCommand(sql, conn);
+
+        cmd.Connection.Open();
+        OdbcDataReader read = cmd.ExecuteReader();
+        read.Read();
+
+        if (read.HasRows)
+        {
+            //if (read.Read())
+            //{
+            Text_Name.Text = read["FULL_USER_NAME"].ToString();
+            Text_Department.Text = read["DEP_NAME"].ToString();
+            //}
+            //else
+            // {
+            //    Response.Redirect("~/Login.aspx");
+            // }
+        }
+        else
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        cmd.Connection.Close();
+    }
+
+    public void CheckAccount()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+        string sql = "SELECT NVL(MAX(ORDER_NO),0)+1 FROM STOCK_REQUEST";
+
+        OdbcConnection odbcconn = new OdbcConnection(connectionString);
+        OdbcCommand odbccmd = new OdbcCommand(sql, odbcconn);
+
+        odbccmd.Connection.Open();
+        OdbcDataReader read = odbccmd.ExecuteReader();
+        read.Read();
+
+        if (read.HasRows)
+        {
+            Text_Num.Text = read[0].ToString();
+        }
+        odbccmd.Connection.Close();
+    }
+
+
+    private void gridView()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+        
+        OdbcConnection odbcconn = new OdbcConnection(connectionString);
+        OdbcCommand odbccmd = new OdbcCommand();
+
+        int i;
+        for (i = 0; i <= GridView1.Rows.Count - 1; i++)
+        {
+            try
+            {
+                if (GridView1.Rows[i].Cells[0].Text.ToString() == "" && GridView1.Rows[i].Cells[1].Text.ToString() == "")
+                {
+                    foreach (GridViewRow row in GridView1.Rows)
+                    {
+                        Label_Messages.Text = "No Records Found";
+                        //Label_Messages0.Text = GridView1.Rows[i].Cells[0].Text;
+                        //Label_Messages1.Text = GridView1.Rows[i].Cells[1].Text;
+                        //Label_Messages2.Text = GridView1.Rows[i].Cells[2].Text;
+                        //Label_Messages3.Text = GridView1.Rows[i].Cells[3].Text;
+
+                        //Label_Messages0.Text = GridView1.HeaderRow.Cells[0].Text;
+                        Label_Messages0.Text = GridView1.Rows[i].Cells[0].FindControl("TextBox6").ToString();
+                        Label_Messages1.Text = GridView1.Rows[i].Cells[1].FindControl("TextBox7").ToString();
+                        Label_Messages2.Text = GridView1.Rows[i].Cells[2].FindControl("TextBox9").ToString();
+                        Label_Messages3.Text = GridView1.Rows[i].Cells[3].FindControl("TextBox8").ToString();
+
+                    }
+                }
+                else
+                {
+                    //odbccmd = new OdbcCommand("INSERT INTO STOCK_REQUEST_DETAILS (BRAN_NO, ORDER_NO, ORDER_DATE, ITEM_NO, DESCRIPTION, QTY_ORDERED)" +
+                    //                          "VALUES('" + GridView1.Rows[i].Cells[0].Text + "', '" + Text_Num.Text + "', @'" + Text_Date.Text + "', '" + GridView1.Rows[i].Cells[2].Text + "', '" + GridView1.Rows[i].Cells[1].Text + "', '" + GridView1.Rows[i].Cells[3].Text + "'))", odbcconn);
+
+                    int i1 = odbccmd.ExecuteNonQuery();
+                    if (i1 <= 0)
+                    {
+                        //System.Windows.Forms.MessageBox.Show("The Records was Not Saved");
+                        Label_Messages.Text = "The Records was Not Saved";
+                    }
+                    else
+                    {
+                        //System.Windows.Forms.MessageBox.Show("The Records was Saved");
+                        Label_Messages.Text = "The Records was Saved";
+                        //Reset_Items();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        ///
+    }
+}
+
+      

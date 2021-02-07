@@ -1,0 +1,590 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Drawing.Design;
+using System.Data.SqlClient;
+using System.Data.Odbc;
+using System.Data;
+using AjaxControlToolkit;
+
+public partial class UsersArea_TravelMigration : System.Web.UI.Page
+{
+    public OdbcCommand comm = null;
+    public OdbcConnection con = null;
+    public OdbcDataAdapter dadapter = null;
+    public DataSet dset = null;
+
+    private string connection = null;
+    protected System.Configuration.Configuration rootCfg = null;
+    protected System.Configuration.ConnectionStringSettings ConfigConString = null;
+
+    public SqlCommand command = null;
+    public SqlConnection conn = null;
+
+    public string EMPLOYEE_NO, DEPARTMENT_NO;
+    public static string EmpName, EmpEmail, Depart, Status = "Send";
+
+    public static TextBox t1  = new TextBox();
+    public static TextBox t2 = new TextBox();
+    public static TextBox t3 = new TextBox();
+
+    public static TextBox txtNewTextBox1 = new TextBox();
+    public static TextBox txtNewTextBox2 = new TextBox();
+    public static TextBox txtNewTextBox3 = new TextBox();
+
+    public static CalendarExtender tt = new CalendarExtender();
+    public static CalendarExtender tt2 = new CalendarExtender();
+
+    public static TextBox Text1, Text2, Text3 = new TextBox();
+    //public static string Text1, Text2, Text3;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        if (EMPLOYEE_NO == "" || EMPLOYEE_NO == null && DEPARTMENT_NO == "" || DEPARTMENT_NO == null)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        else
+        {
+            if (!IsPostBack)
+            {
+                Text_Date.Text = DateTime.Now.Date.ToString("dd-MMMM-yyyy");
+                getMenu();
+                CheckAccount();
+                UserData();
+                ServiceType();
+                ContractorData();
+                TravelLocation();
+                Label18.Visible = false;
+                CreateTextBox();
+                //PlaceHolderData();
+            }
+        }
+    }
+    protected void Butt_Submit_Click(object sender, EventArgs e)
+    {
+        if (Text_Remarks.Text.Length <= 500)
+        {
+            Insert();
+            //SendEMail(Status);
+            Reset();
+            CheckAccount();
+            Label18.Visible = false;
+            CreateTextBox();
+        }
+        else
+        {
+            Label18.Visible = true;
+        }
+    }
+    protected void Butt_Reset_Click(object sender, EventArgs e)
+    {
+        Reset();
+    }
+    public void UserData()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+       string sql = "SELECT USERS_INFORMATIONS.FULL_USER_NAME, USERS_INFORMATIONS.EMAIL, DEPARTMENTS.DEP_NAME FROM USERS_INFORMATIONS INNER JOIN DEPARTMENTS ON (USERS_INFORMATIONS.DEP_NO = DEPARTMENTS.DEP_NO) AND USERS_INFORMATIONS.DEP_NO = '" + int.Parse(DEPARTMENT_NO) + "' WHERE USERS_INFORMATIONS.EMPLOYEE_NO = '" + Int32.Parse(EMPLOYEE_NO) + "'";
+
+
+        OdbcConnection conn = new OdbcConnection(connectionString);
+        OdbcCommand cmd = new OdbcCommand(sql, conn);
+
+        cmd.Connection.Open();
+        OdbcDataReader read = cmd.ExecuteReader();
+        read.Read();
+
+        if (read.HasRows)
+        {
+            Text_Name.Text = read["FULL_USER_NAME"].ToString();
+            Text_Department.Text = read["DEP_NAME"].ToString();
+        }
+        else
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        cmd.Connection.Close();
+    }
+    public void ContractorData()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        string sql = "SELECT EMPLOYEE_NAME, EMPLOYEE_NO FROM EMPLOYEES WHERE EMPLOYEE_STATUS = 1";
+
+        dadapter = new OdbcDataAdapter(sql, connectionString);
+        dset = new DataSet();
+        dadapter.Fill(dset);
+        DropDownList1.DataSource = dset.Tables[0];
+        DropDownList1.DataTextField = "EMPLOYEE_NAME";
+        DropDownList1.DataValueField = "EMPLOYEE_NO";
+        DropDownList1.DataBind();
+        DropDownList1.Items.Insert(0, new ListItem("<<<Select>>>", "0"));
+        DropDownList1.SelectedIndex = 0;
+        DropDownList1.SelectedValue = "0";
+        DropDownList1.SelectedItem.Value = "0";
+    }
+    public void ServiceType()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        string sql = "SELECT SER_NO, SER_NAME FROM TRAVEL_SERVICES_TYPE";
+
+        dadapter = new OdbcDataAdapter(sql, connectionString);
+        dset = new DataSet();
+        dadapter.Fill(dset);
+        CheckBoxList1.DataSource = dset.Tables[0];
+        CheckBoxList1.DataTextField = "SER_NAME";
+        CheckBoxList1.DataValueField = "SER_NO";
+        CheckBoxList1.DataBind();
+        }
+    /*
+     public void PlaceHolderData()
+    {
+        for (int i = 1; i < CheckBoxList1.Items.Count; i++)
+        {
+            TextBox t = new TextBox();
+            t.ID   = "TextBox1" + i.ToString();
+            //t.Text = "TextBox1" + i.ToString();
+
+            t.Width = TextBox1.Width;
+            t.BorderWidth = TextBox1.BorderWidth;
+            //t.AutoPostBack = true;
+
+            AjaxControlToolkit.CalendarExtender tt = new AjaxControlToolkit.CalendarExtender();
+            tt.TargetControlID = "TextBox1" + i.ToString();
+            tt.Format = "dd-MMMM-yyyy";
+
+
+            TextBox t2 = new TextBox();
+            t2.ID = "TextBox2" + i.ToString();
+            //t2.Text = "TextBox2" + i.ToString();
+
+            t2.Width = TextBox2.Width;
+            t2.BorderWidth = TextBox2.BorderWidth;
+            //t2.AutoPostBack = true;
+
+            AjaxControlToolkit.CalendarExtender tt2 = new AjaxControlToolkit.CalendarExtender();
+            tt2.TargetControlID = "TextBox2" + i.ToString();
+            tt2.Format = "dd-MMMM-yyyy";
+
+            TextBox t3 = new TextBox();
+            t3.ID   = "TextBox3" + i.ToString();
+            //t3.Text = "TextBox3" + i.ToString();
+
+            t3.Width = TextBox3.Width;
+            t3.Height = TextBox3.Height;
+            t3.BorderWidth = 1;
+            t3.TextMode = TextBox3.TextMode;
+            //t3.AutoPostBack = true;
+
+            PlaceHolder1.Controls.Add(t);
+            PlaceHolder1.Controls.Add(tt);
+
+            PlaceHolder2.Controls.Add(t2);
+            PlaceHolder2.Controls.Add(tt2);
+            PlaceHolder3.Controls.Add(t3);
+
+            //Text = Convert.ToString(PlaceHolder1.FindControl("TextBox1") as TextBox);
+            //Text2 = Convert.ToString(PlaceHolder2.FindControl("TextBox2") as TextBox);
+            //Text3 =  Convert.ToString(PlaceHolder3.FindControl("TextBox3") as TextBox);
+
+            //TextBox Text1 = (TextBox)PlaceHolder1.FindControl("TextBox1" + (i + 1));
+            //Text1.Text = t.Text[i].ToString();
+
+            ////(TextBox)PlaceHolder1.FindControl("txt1" + (i + 1));
+
+            //TextBox Text2 = (TextBox)PlaceHolder2.FindControl("TextBox2" + (i + 1));
+            //Text2.Text = t2.Text[i].ToString();
+
+            //TextBox Text3 = (TextBox)PlaceHolder3.FindControl("TextBox3" + (i + 1));
+            //Text3.Text = t3.Text[i].ToString();
+    }
+    }*/
+    public void TravelLocation()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        string sql = "SELECT LOC_NO, LOC_NAME FROM FLT_LOCATION";
+
+        dadapter = new OdbcDataAdapter(sql, connectionString);
+        dset = new DataSet();
+        dadapter.Fill(dset);
+        DropDownList2.DataSource = dset.Tables[0];
+        DropDownList2.DataTextField = "LOC_NAME";
+        DropDownList2.DataValueField = "LOC_NO";
+        DropDownList2.DataBind();
+        DropDownList2.Items.Insert(0, new ListItem("<<<Select>>>", "0"));
+        DropDownList2.SelectedIndex = 0;
+        DropDownList2.SelectedValue = "0";
+        DropDownList2.SelectedItem.Value = "0";
+    }
+    public void ContractorSection()
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        string sql = "SELECT EMPLOYEES.EMPLOYEE_NO, EMPLOYEES.EMPLOYEE_NAME, DEPARTMENTS.DEP_NAME,"+
+            "LKP_JOBS.JOB_NAME, PROJECT_CODE.PROJ_NAME "+
+			"FROM  LKP_JOBS, PROJECT_CODE, EMPLOYEES INNER JOIN DEPARTMENTS ON (EMPLOYEES.DEPT_DEPARTMRNT_NO = DEPARTMENTS.DEP_NO) WHERE "+
+            "EMPLOYEES.EMPLOYEE_NO = '"+ DropDownList1.SelectedValue +"' AND EMPLOYEES.JOB_NO = LKP_JOBS.JOB_NO AND EMPLOYEES.SECTION_NO = PROJECT_CODE.PROJ_NO AND "+
+			"EMPLOYEES.EMPLOYEE_STATUS = 1";
+
+        /*
+        SELECT EMPLOYEES.EMPLOYEE_NO, EMPLOYEES.EMPLOYEE_NAME, DEPARTMENTS.DEP_NAME, EMPLOYEES.DATE_OF_JOIN, EMPLOYEES.EMAIL, EMPLOYEES.ID_CARD,"+
+           "LKP_JOBS.JOB_NAME, PROJECT_CODE.PROJ_NAME "+
+           "FROM  LKP_JOBS, PROJECT_CODE, EMPLOYEES INNER JOIN DEPARTMENTS ON (EMPLOYEES.DEPT_DEPARTMRNT_NO = DEPARTMENTS.DEP_NO) WHERE "+
+           "EMPLOYEES.EMPLOYEE_NO = '" + Convert.ToInt32(Request.QueryString["EMPLOYEE_NO"]) + "' AND EMPLOYEES.JOB_NO = LKP_JOBS.JOB_NO AND EMPLOYEES.SECTION_NO = PROJECT_CODE.PROJ_NO AND " +
+           "EMPLOYEES.EMPLOYEE_STATUS = 1"
+        */
+
+        OdbcConnection conn = new OdbcConnection(connectionString);
+        OdbcCommand cmd = new OdbcCommand(sql, conn);
+
+        cmd.Connection.Open();
+        OdbcDataReader read = cmd.ExecuteReader();
+        read.Read();
+
+        if (read.HasRows)
+        {
+            Text_SectionName.Text = read["PROJ_NAME"].ToString();
+        }
+        else
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        cmd.Connection.Close();
+    }
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ContractorSection();
+        CreateTextBox();
+    }
+    public void CreateTextBox()
+    {
+        int i = 0;
+       //txtNewTextBox1 = new TextBox[i];
+       //txtNewTextBox2 = new TextBox[i];
+       //txtNewTextBox3 = new TextBox[i];
+
+       for (i = 0; i < CheckBoxList1.Items.Count; i++)
+        {
+            
+            //txtNewTextBox1 = new TextBox();
+           TextBox txtNewTextBox1 = new TextBox();
+
+            txtNewTextBox1.ID = "txtNewTextBox1" + i.ToString();
+            txtNewTextBox1.Width = 120;
+            txtNewTextBox1.BorderWidth = 1;
+           
+
+            CalendarExtender ca1 = new CalendarExtender();
+            ca1.TargetControlID = "txtNewTextBox1" + i.ToString();
+            ca1.Format = "dd-MMMM-yyyy";
+
+            Panel1.Controls.Add(txtNewTextBox1);
+            Panel1.Controls.Add(ca1);
+           ////////////////////////////////////////////
+            TextBox txtNewTextBox2 = new TextBox();
+            txtNewTextBox2.ID = "txtNewTextBox2" + i.ToString();
+            
+
+            txtNewTextBox2.Width = 120;
+            txtNewTextBox2.BorderWidth = 1;
+            
+
+            CalendarExtender ca2 = new CalendarExtender();
+            ca2.TargetControlID = "txtNewTextBox2" + i.ToString();
+            ca2.Format = "dd-MMMM-yyyy";
+
+            Panel2.Controls.Add(txtNewTextBox2); 
+            Panel2.Controls.Add(ca2);
+           //////////////////////////////////////
+           TextBox txtNewTextBox3 = new TextBox();
+            txtNewTextBox3.ID = "txtNewTextBox3" + i.ToString();
+            txtNewTextBox3.Width = 180;
+            txtNewTextBox3.BorderWidth = 1;
+
+            Panel3.Controls.Add(txtNewTextBox3);
+        }
+    }
+    public void Insert()
+    {
+        rootCfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/petroneeds");
+        connection = rootCfg.ConnectionStrings.ConnectionStrings["petroneedsConnectionString"].ConnectionString.ToString();
+        string sql, sql2;
+
+        string strValue1="", strValue2="", strValue3="";
+
+        //string[] strValue1;
+        //string[] strValue2;
+        //string[] strValue3;
+
+        
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        CheckAccount();
+  
+            sql = "INSERT INTO TRAVEL_SERVICES_MST " +
+           "(TS_NO, TS_DATE, DEP_NO, SEC_NO, CREATED_USER, CREATED_DATE, REMARKS, MNGR_ID, MNGR_DATE, MNGR_TXT, STATUS, LOC_NO)  VALUES" +
+
+
+            "('" + Text_Num.Text + "', '" + Text_Date.Text + "', '" + DEPARTMENT_NO + "', '4', '" + EMPLOYEE_NO + "', '" + Text_Date.Text + "'," +
+            "'" + Text_Remarks.Text + "', '', '', '', '3', '"+ DropDownList2.SelectedValue +"')";
+            //0
+            con = new OdbcConnection(connection);
+            con.ConnectionString = connection;
+            con.Open();
+
+            comm = new OdbcCommand(sql, con);
+            comm.ExecuteNonQuery();        
+       
+            int x = 0;
+
+
+            for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+            {
+                x++;
+                //strValue1 = new string[i];
+                //strValue2 = new string[i];
+                //strValue3 = new string[i];
+
+                if (CheckBoxList1.Items[i].Selected)
+                {
+                    //txtNewTextBox1.ID = Convert.ToString(Panel1.FindControl("txtNewTextBox01" + (i)) as TextBox);
+                    //txtNewTextBox2.ID = Convert.ToString(Panel2.FindControl("txtNewTextBox02" + (i)) as TextBox);
+                    //txtNewTextBox3.ID = Convert.ToString(Panel3.FindControl("txtNewTextBox03" + (i)) as TextBox);
+
+                    string id1 = "t" + i + 1;
+                    string id2 = "t2" + i + 1;
+                    string id3 = "t3" + i + 1;
+
+                    //Panel p = (Panel)this.Form.FindControl("Panel1") as Panel;
+
+                    //TextBox t = (TextBox)this.Page.FindControl(id1) as TextBox;
+                    //TextBox t2 = (TextBox)this.Page.FindControl(id2) as TextBox;
+                    //TextBox t3 = (TextBox)this.Page.FindControl(id3) as TextBox;
+
+                    TextBox t  = this.Page.FindControl(id1) as TextBox;
+                    TextBox t2 = this.Page.FindControl(id2) as TextBox;
+                    TextBox t3 = this.Page.FindControl(id3) as TextBox;
+
+                    tt.TargetControlID = "t" + x.ToString();
+                    tt2.TargetControlID = "t2" + x.ToString();
+
+                  
+
+                    //t.ID = id1;
+                    //t2.ID = id2;
+                    //t3.ID = id3;
+
+                    //strValue1 = t.Text.ToString().Trim();
+
+                   // TextBox t  = Panel1.FindControl(id1) as TextBox;
+                    //TextBox t2 = Panel2.FindControl(id2) as TextBox;
+                    //TextBox t3 = Panel3.FindControl(id3) as TextBox;
+
+                    Response.Write(t);
+                    Response.Write(t2);
+                    Response.Write(t3);
+                    //strValue1 = t.Text;
+                    //strValue2 = t2.Text;
+                    //strValue3 = t3.Text;
+
+                            //txtNewTextBox1.Text = Convert.ToString(Panel1.FindControl("txtNewTextBox1" + i + 1.ToString()) as TextBox);
+                            //txtNewTextBox2.Text = Convert.ToString(Panel2.FindControl("txtNewTextBox2" + i + 1.ToString()) as TextBox);
+                            //txtNewTextBox3.Text = Convert.ToString(Panel3.FindControl("txtNewTextBox3" + i + 1.ToString()) as TextBox);
+
+                            //t1.ID = "txtNewTextBox1" + Guid.NewGuid().ToString("N");
+                            //t2.ID = "txtNewTextBox2" + Guid.NewGuid().ToString("N");
+                            //t3.ID = "txtNewTextBox3" + Guid.NewGuid().ToString("N");
+
+                            //txtNewTextBox1.ID = "txtNewTextBox1" + i.ToString();
+                            //txtNewTextBox2.ID = "txtNewTextBox2" + i.ToString();
+                            //txtNewTextBox3.ID = "txtNewTextBox3" + i.ToString();
+
+                            //txtNewTextBox1.ID = i.ToString();
+                            //txtNewTextBox2.ID = i.ToString();
+                            //txtNewTextBox3.ID = i.ToString();
+
+                            //strValue1 = ((TextBox)txtNewTextBox1).Text;
+                            //strValue2 = ((TextBox)txtNewTextBox2).Text;
+                            //strValue3 = ((TextBox)txtNewTextBox3).Text;
+
+                            //strValue1 = txtNewTextBox1.Text;
+                            //strValue2 = txtNewTextBox2.Text;
+                            //strValue3 = txtNewTextBox3.Text;
+
+                            //strValue1 = Request.Form["txtNewTextBox1"];
+                            //strValue2 = Request.Form["txtNewTextBox2"];
+                            //strValue3 = Request.Form["txtNewTextBox3"];
+
+                            //strValue1[i] = txtNewTextBox1.Text;
+                            //strValue2[i] = txtNewTextBox2.Text;
+                            //strValue3[i] = txtNewTextBox3.Text;
+
+                            //strValue1[i] = ((TextBox)txtNewTextBox1).Text;
+                            //strValue2[i] = ((TextBox)txtNewTextBox2).Text;
+                            //strValue3[i] = ((TextBox)txtNewTextBox3).Text;
+
+                            //strValue1 = t1.Text;
+                            //strValue2 = t2.Text;
+                            //strValue3 = t3.Text;
+
+                            sql2 = "INSERT INTO TRAVEL_SERVICES_DTL " +
+                                            "(TS_NO, SER_NO, SER_FROM, SER_TO, REMARK)  VALUES" +
+                                            "('" + Text_Num.Text + "', '" + x + "', '" + strValue1 + "', '" + strValue2 + "', '" + strValue3 + "')";
+                            //"('" + Text_Num.Text + "', '" + x + "', '" + CheckBoxList1.Items[i].Selected + "')";
+
+                            comm = new OdbcCommand(sql2, con);
+                            comm.ExecuteNonQuery();
+                            strValue1 = "";
+                            strValue2 = "";
+                            strValue3 = "";
+                        }
+                    }                        
+            
+        con.Close();
+        //Reset();
+        Label_Messages.Text = "Thank You Mr,Mrs/ " + Text_Name.Text + " Your Record Saved";
+    }
+    private void Reset()
+        {
+                for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+                    {
+                        CheckBoxList1.Items[i].Selected = false;
+                    }
+
+                Label_Messages.Text = "";
+                Text_Remarks.Text = "";
+                Label18.Visible = false;
+                DropDownList1.SelectedIndex = 0;
+                DropDownList2.SelectedIndex = 0;
+                Text_SectionName.Text = "";
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+       
+        }
+    public void CheckAccount()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+            //string sql = "SELECT MAX(TS_NO)+1 FROM TRAVEL_SERVICES_MST";
+            string sql = "SELECT NVL(MAX(TS_NO),0)+1 FROM TRAVEL_SERVICES_MST";
+            OdbcConnection conn = new OdbcConnection(connectionString);
+            OdbcCommand cmd = new OdbcCommand(sql, conn);
+
+            cmd.Connection.Open();
+            OdbcDataReader read = cmd.ExecuteReader();
+            read.Read();
+
+            if (read.HasRows)
+            {
+                Text_Num.Text = read[0].ToString();
+            }
+            //else
+            //{
+            //    //Text_Num.Text = "1";
+            //}
+            cmd.Connection.Close();
+        }
+    private void getMenu()
+        {
+            EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+            DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+            rootCfg = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/petroneeds");
+            connection = rootCfg.ConnectionStrings.ConnectionStrings["petroneedsConnectionString2"].ConnectionString.ToString();
+
+            conn = new SqlConnection(connection);
+            conn.ConnectionString = connection;
+            conn.Open();
+
+
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+
+            //string sql = "Select * from tbl_WebMenu";
+            string sql = "Select * from tbl_WebMenu INNER JOIN User_Check ON (tbl_WebMenu.MenuID = User_Check.MenuID)" +
+                //"AND (User_Check.MenuID = tbl_WebMenu.ParentID)" +
+                            "AND (User_Check.EmpNumber = '" + EMPLOYEE_NO + "' ) AND (User_Check.STATUS = '" + 1 + "')";
+
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            da.Fill(ds);
+            dt = ds.Tables[0];
+            DataRow[] drowpar = dt.Select("ParentID=" + 0);
+
+            foreach (DataRow dr in drowpar)
+            {
+                menuBar.Items.Add(new MenuItem(dr["MenuName"].ToString(),
+                        dr["MenuID"].ToString(), "",
+                        dr["MenuLocation"].ToString()));
+            }
+
+            foreach (DataRow dr in dt.Select("ParentID >" + 0))
+            {
+                MenuItem mnu = new MenuItem(dr["MenuName"].ToString(),
+                    //dr["MenuID"].ToString(), "", dr["MenuLocation"] + "?EMPLOYEE_NO=" + EMPLOYEE_NO.ToString()); //dr["MenuID"].ToString(),"", dr["MenuLocation"].ToString());
+                                    dr["MenuID"].ToString(), "", dr["MenuLocation"] + "?EMPLOYEE_NO=" + EMPLOYEE_NO.ToString() + "&DEP_NO=" + DEPARTMENT_NO.ToString()); //dr["MenuID"].ToString(),"", dr["MenuLocation"].ToString());
+                menuBar.FindItem(dr["ParentID"].ToString()).ChildItems.Add(mnu);
+            }
+            conn.Close();
+        }
+    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CreateTextBox();
+    }
+    public void SendEMail(string Status)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["PetroneedsConnectionString"].ConnectionString;
+
+        EMPLOYEE_NO = Request.QueryString["EMPLOYEE_NO"];
+        DEPARTMENT_NO = Request.QueryString["DEP_NO"];
+
+        string date;
+        date = DateTime.Now.Date.ToString("dd-MMMM-yyyy");
+
+
+        string sql = "SELECT USERS_INFORMATIONS.EMAIL, USERS_INFORMATIONS.FULL_USER_NAME, DEPARTMENTS.DEP_NAME " +
+            "FROM USERS_INFORMATIONS, DEPARTMENTS WHERE DEPARTMENTS.DEP_NO = USERS_INFORMATIONS.DEP_NO AND USERS_INFORMATIONS.EMPLOYEE_NO IN " +
+            "(SELECT MNG FROM EMP_MNG WHERE EMPLOYEE_NO = '" + EMPLOYEE_NO + "')";
+
+        OdbcConnection conn = new OdbcConnection(connectionString);
+        OdbcCommand cmd = new OdbcCommand(sql, conn);
+        cmd.Connection.Open();
+        OdbcDataReader read = cmd.ExecuteReader();
+        read.Read();
+
+        if (read.HasRows)
+        {
+            EmpName = read["FULL_USER_NAME"].ToString();
+            EmpEmail = read["EMAIL"].ToString();
+            Depart = read["DEP_NAME"].ToString();
+        }
+        Response.Redirect("~/UsersArea/E-mail.aspx?EMPLOYEE_NO=&DEP_NO=&FULL_USER_NAME=" + EmpName + "&EMAIL=" + EmpEmail + "&DEP_NAME=" + Depart + "&DATE=" + date + "&REQNAME=Leave Request Information&USERNAMESREQ=" + Text_Name.Text + "");
+        //Response.Redirect("~/UsersArea/E-mail.aspx?EMPLOYEE_NO=&DEP_NO=&FULL_USER_NAME=" + EmpName + "&EMAIL=portal@petroneed.com.sd&DEP_NAME=" + Depart + "&DATE=" + date + "&REQNAME=Leave Request Information&USERNAMESREQ=" + Text_Name.Text + "");
+        //Response.Redirect("~/UsersArea/E-mail.aspx?EMPLOYEE_NO=&DEP_NO=&FULL_USER_NAME=" + EmpName + "&EMAIL=" + EmpEmail + "&DEP_NAME=" + Depart + "&DATE=" + date + "&REQNAME=Leave Request Information&USERNAMESREQ=" + Text_Name.Text + "");
+        cmd.Connection.Close();
+    }
+}

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<configuration>
+    <system.web>
+
+    </system.web>
+
+  <system.net>
+    <mailSettings>
+
+   
+
+
+    </mailSettings>
+  </system.net>
+</configuration>

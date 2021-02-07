@@ -1,0 +1,377 @@
+﻿<%@ Page Title="Function Request Information" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FunctionRequest.aspx.cs" Inherits="FunctionRequest" %>
+
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .style7
+        {
+            width: 117%;
+        }
+        .style26
+        {
+            font-size: 13pt;
+        }
+        .style28
+        {
+            width: 52px;
+        }
+        .style37
+        {
+            height: 17px;
+            width: 52px;
+        }
+        .style38
+        {
+            width: 127px;
+            height: 17px;
+        }
+        .style42
+        {
+            height: 25px;
+        }
+        .style43
+        {
+            height: 25px;
+            width: 52px;
+        }
+        .style45
+        {
+            height: 25px;
+            width: 494px;
+        }
+        .style49
+        {
+            height: 25px;
+        }
+        .style54
+        {
+            width: 127px;
+        }
+        .style55
+        {
+            width: 127px;
+            height: 40px;
+        }
+        .style56
+        {
+            height: 40px;
+            width: 52px;
+        }
+        .style57
+        {
+            height: 40px;
+        }
+        .style58
+        {
+            height: 40px;
+            width: 494px;
+        }
+        .style59
+        {
+            width: 454px;
+            border-collapse: collapse;
+        }
+        .style61
+        {
+        width: 99px;
+        height: 25px;
+    }
+        .style62
+        {
+            width: 127px;
+            height: 25px;
+        }
+        .style63
+        {
+            width: 33px;
+            height: 25px;
+        }
+        .style66
+        {
+        width: 28px;
+        height: 25px;
+    }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" runat="server" 
+    contentplaceholderid="ContentPlaceHolder2">
+    <table cellpadding="0" cellspacing="0" class="style7">
+        <tr>
+            <td colspan="3">
+                <b style="mso-bidi-font-weight:normal">
+                <span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;mso-ascii-theme-font:
+minor-latin;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;
+mso-fareast-language:EN-US;mso-bidi-language:AR-SA" class="style26">Function </span>
+                <span style="font-size:12.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;mso-ascii-theme-font:
+minor-latin;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;
+mso-fareast-language:EN-US;mso-bidi-language:AR-SA"><b style="mso-bidi-font-weight: normal">
+                <span style="font-family: &quot;Calibri&quot;,&quot;sans-serif&quot;; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: &quot;Times New Roman&quot;; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &quot;Times New Roman&quot;; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA" 
+                    class="style26">Request </span></b></span>
+                <span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;mso-ascii-theme-font:
+minor-latin;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;
+mso-fareast-language:EN-US;mso-bidi-language:AR-SA" class="style26">Information</span></b></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style54">
+            </td>
+            <td class="style28">
+            </td>
+            <td>
+            </td>
+            <td>
+                </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label16" runat="server" Text="Number" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:TextBox ID="Text_Num" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="66px" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td class="style49">
+            </td>
+            <td class="style45">
+            </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label14" runat="server" Text="Date" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:TextBox ID="Text_Date" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="140px" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td class="style49">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                    ControlToValidate="Text_Num" ErrorMessage="*" ForeColor="#CC0000" 
+                    SetFocusOnError="True"></asp:RequiredFieldValidator>
+            </td>
+            <td class="style45">
+            </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label5" runat="server" Text="Department" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:DropDownList ID="DropDownList1" runat="server" ForeColor="#6C6459" 
+                    Height="32px" Width="276px" 
+                    DataSourceID="SqlDataSource2" DataTextField="DEP_NAME" 
+                    DataValueField="DEP_NO">
+                    <asp:ListItem Selected="True" Text="<<<Select>>>" Value="0">&lt;&lt;&lt;Select&gt;&gt;&gt;</asp:ListItem>
+                </asp:DropDownList>
+            </td>
+            <td class="style49">
+            </td>
+            <td class="style45">
+            </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label2" runat="server" Text="Name" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:TextBox ID="Text_Name" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="291px" BorderWidth="1px" MaxLength="50" 
+                    ReadOnly="True" Height="21px"></asp:TextBox>
+            </td>
+            <td class="style49">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                    ControlToValidate="Text_Name" ErrorMessage="*" ForeColor="#CC0000" 
+                    SetFocusOnError="True"></asp:RequiredFieldValidator>
+            </td>
+            <td class="style45">
+            </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label17" runat="server" Text="No.Of Guest" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:TextBox ID="Text_No_Guest" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="83px" BorderWidth="1px" MaxLength="50" 
+                    ReadOnly="True" Height="21px"></asp:TextBox>
+            </td>
+            <td class="style49">
+            </td>
+            <td class="style45">
+            </td>
+        </tr>
+        <tr>
+            <td class="style55">
+                <asp:Label ID="Label18" runat="server" Text="Function Location" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style56">
+                <asp:TextBox ID="Text_Location" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="320px" BorderWidth="1px" MaxLength="50" 
+                    ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+            </td>
+            <td class="style57">
+            </td>
+            <td class="style58">
+            </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label19" runat="server" Text="Purpose of Function" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:TextBox ID="Text_Purpose" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="320px" BorderWidth="1px" MaxLength="50" 
+                    ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+            </td>
+            <td class="style49">
+            </td>
+            <td class="style45">
+            </td>
+        </tr>
+        <tr>
+            <td class="style42" colspan="2">
+                <table cellpadding="0" class="style59">
+                    <tr>
+                        <td class="style61">
+                            <asp:Label ID="Label20" runat="server" Text="Starting Time" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                        </td>
+                        <td class="style66">
+                        </td>
+                        <td class="style63">
+                            <asp:TextBox ID="Text_Strat" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="140px" BorderWidth="1px" ReadOnly="True"></asp:TextBox>
+                            <asp:CalendarExtender ID="Text_Strat_CalendarExtender" runat="server" 
+                                TargetControlID="Text_Strat" Format="dd-MMMM-yyyy">
+                            </asp:CalendarExtender>
+                        </td>
+                        <td class="style42">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style61">
+                            <asp:Label ID="Label21" runat="server" Text="Ending Time" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+                        </td>
+                        <td class="style66">
+                        </td>
+                        <td class="style63">
+                            <asp:TextBox ID="Text_End" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="140px" BorderWidth="1px" ReadOnly="True" 
+                                style="margin-bottom: 0px"></asp:TextBox>
+                            <asp:CalendarExtender ID="Text_End_CalendarExtender" runat="server" 
+                                TargetControlID="Text_End" Format="dd-MMMM-yyyy">
+                            </asp:CalendarExtender>
+                        </td>
+                        <td class="style42">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="style49">
+            </td>
+            <td class="style49">
+            </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label22" runat="server" Text="Arrangements" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:TextBox ID="Text_Arrangements" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="320px" BorderWidth="1px" MaxLength="50" 
+                    ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+            </td>
+            <td class="style49">
+            </td>
+            <td class="style45">
+            </td>
+        </tr>
+        <tr>
+            <td class="style62">
+                <asp:Label ID="Label23" runat="server" Text="Request By" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style43">
+                <asp:TextBox ID="Text_Request_By" runat="server" BorderColor="#B00000" 
+                    BorderStyle="Solid" Width="291px" BorderWidth="1px" MaxLength="50" 
+                    ReadOnly="True" Height="20px"></asp:TextBox>
+            </td>
+            <td class="style49">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                    ControlToValidate="Text_Request_By" ErrorMessage="*" ForeColor="#CC0000" 
+                    SetFocusOnError="True"></asp:RequiredFieldValidator>
+            </td>
+            <td class="style49">
+            </td>
+        </tr>
+        <tr>
+            <td class="style54">
+                &nbsp;</td>
+            <td class="style37">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style38">
+            </td>
+            <td class="style37">
+                <asp:Label ID="Label_Messages" runat="server" Font-Size="12px" 
+                    ForeColor="Maroon"></asp:Label>
+            </td>
+            <td class="style8">
+            </td>
+            <td class="style8">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style54">
+            </td>
+            <td class="style37">
+                <asp:Button ID="Butt_Submit" runat="server" Font-Names="Verdana" Font-Size="9pt" 
+                    Text="Submit" onclick="Butt_Submit_Click" Width="65px" />
+                <asp:Button ID="Butt_Reset" runat="server" Font-Names="Verdana" Font-Size="9pt" 
+                    Text="Reset" CausesValidation="False" onclick="Butt_Reset_Click" 
+                    Width="65px" />
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style54">
+                &nbsp;</td>
+            <td class="style37">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:PetroneedsConnectionString %>" 
+                    ProviderName="<%$ ConnectionStrings:PetroneedsConnectionString.ProviderName %>" 
+                    SelectCommand="SELECT DEP_NAME, DEP_NO FROM MP.DEPARTMENTS">
+                </asp:SqlDataSource>
+                <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+                </asp:ToolkitScriptManager>
+            </td>
+            <td>
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+    </table>
+</asp:Content>
+
+

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<configuration>
+    <system.web>
+
+    </system.web>
+
+  <system.net>
+    <mailSettings>
+      <smtp from="portal@" deliveryMethod="Network">
+    
+      </smtp>
+    </mailSettings>
+  </system.net>
+</configuration>
